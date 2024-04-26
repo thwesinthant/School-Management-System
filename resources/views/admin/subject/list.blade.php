@@ -17,7 +17,7 @@
              </div><!-- /.container-fluid -->
          </section>
 
-         {{-- Search Admin Form --}}
+         {{-- Search Subject Form --}}
          <div class="row" style="margin:7.5px ">
              <div class="col-md-12">
                  <div class="card">

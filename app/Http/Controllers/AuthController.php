@@ -10,7 +10,6 @@ use App\Mail\ForgotPasswordMail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Hash as FacadesHash;
 
 
 class AuthController extends Controller
