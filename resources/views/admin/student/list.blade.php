@@ -35,8 +35,22 @@
                                      <thead>
                                          <tr style="text-align: center;">
                                              <th>#</th>
+                                             <th>Profile Pic</th>
                                              <th>Name</th>
                                              <th>Email</th>
+                                             <th>Admission Number</th>
+                                             <th>Roll Number</th>
+                                             <th>Class</th>
+                                             <th>Gender</th>
+                                             <th>Date of Birth</th>
+                                             <th>Caste</th>
+                                             <th>Religion</th>
+                                             <th>Mobile Number</th>
+                                             <th>Admission Date</th>
+                                             <th>Blood Group</th>
+                                             <th>Height</th>
+                                             <th>Weight</th>
+                                             <th>Status</th>
                                              <th>Created Date</th>
                                              <th>Action</th>
                                          </tr>
@@ -50,9 +64,9 @@
                                                  <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}
                                                  </td>
                                                  <td style="text-align: center; ">
-                                                     <a href="{{ url('admin/admin/edit', $value->id) }}"
+                                                     <a href="{{ url('admin/student/edit', $value->id) }}"
                                                          class="btn btn-primary">Edit</a>
-                                                     <a href="{{ url('admin/admin/delete', $value->id) }}"
+                                                     <a href="{{ url('admin/student/delete', $value->id) }}"
                                                          class="btn btn-danger">Delete</a>
                                                  </td>
                                              </tr>
