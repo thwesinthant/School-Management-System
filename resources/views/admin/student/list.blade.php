@@ -26,11 +26,11 @@
                          @include('message')
 
                          <div class="card">
-                             <div class="card-header">
+                             <div class="card-header ">
                                  <h3 class="card-title">Student List</h3>
                              </div>
                              <!-- /.card-header -->
-                             <div class="card-body p-0">
+                             <div class="card-body p-0" style="overflow: auto">
                                  <table class="table table-striped">
                                      <thead>
                                          <tr style="text-align: center;">
@@ -59,15 +59,43 @@
                                          @foreach ($getRecord as $value)
                                              <tr style="text-align: center;">
                                                  <td>{{ $value->id }}</td>
-                                                 <td>{{ $value->name }}</td>
+                                                 <td>
+                                                     @if (!empty($value->getProfile()))
+                                                         <img src="{{ $value->getProfile() }}" alt="profile_pic"
+                                                             style="width: 50px ;height:50px; border-radius:50px;">
+                                                     @endif
+                                                 </td>
+
+                                                 <td>{{ $value->name }} {{ $value->last_name }}</td>
                                                  <td>{{ $value->email }}</td>
+                                                 <td>{{ $value->admission_number }}</td>
+                                                 <td>{{ $value->roll_number }}</td>
+                                                 <td>{{ $value->class_name }}</td>
+                                                 <td>{{ $value->gender }}</td>
+                                                 <td>
+                                                     @if (!empty($value->date_of_birth))
+                                                         {{ date('d-m-Y', strtotime($value->date_of_birth)) }}
+                                                     @endif
+                                                 </td>
+                                                 <td>{{ $value->caste }}</td>
+                                                 <td>{{ $value->religion }}</td>
+                                                 <td>{{ $value->mobile_number }}</td>
+                                                 <td>
+                                                     @if (!empty($value->admission_date))
+                                                         {{ date('d-m-Y', strtotime($value->admission_date)) }}
+                                                     @endif
+                                                 </td>
+                                                 <td>{{ $value->blood_group }}</td>
+                                                 <td>{{ $value->height }}</td>
+                                                 <td>{{ $value->weight }}</td>
+                                                 <td>{{ $value->status == 0 ? 'Active' : 'Inactive' }}</td>
                                                  <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}
                                                  </td>
-                                                 <td style="text-align: center; ">
+                                                 <td style="text-align: center;min-width:150px">
                                                      <a href="{{ url('admin/student/edit', $value->id) }}"
-                                                         class="btn btn-primary">Edit</a>
+                                                         class="btn btn-primary btn-sm">Edit</a>
                                                      <a href="{{ url('admin/student/delete', $value->id) }}"
-                                                         class="btn btn-danger">Delete</a>
+                                                         class="btn btn-danger btn-sm">Delete</a>
                                                  </td>
                                              </tr>
                                          @endforeach
