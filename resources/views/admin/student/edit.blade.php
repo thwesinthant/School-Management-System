@@ -104,7 +104,7 @@
                                          </div>
                                          <div class="form-group col-md-6">
                                              <label> Caste <span style="color: red">*</span> </label>
-                                             <input type="type" name="caste"
+                                             <input type="text" name="caste"
                                                  value="{{ old('caste', $getRecord->caste) }}" class="form-control"
                                                  placeholder=" Caste" required>
                                              <div style="color: red;">
@@ -122,7 +122,7 @@
                                          </div>
                                          <div class="form-group col-md-6">
                                              <label> Mobile Number <span style="color: red">*</span> </label>
-                                             <input type="type" name="mobile_number"
+                                             <input type="text" name="mobile_number"
                                                  value="{{ old('mobile_number', $getRecord->mobile_number) }}"
                                                  class="form-control" placeholder="Mobile Number" required>
                                              <div style="color: red;">
@@ -152,7 +152,7 @@
                                          </div>
                                          <div class="form-group col-md-6">
                                              <label> Blood Group <span style="color: red">*</span> </label>
-                                             <input type="type" name="blood_group"
+                                             <input type="text" name="blood_group"
                                                  value="{{ old('blood_group', $getRecord->blood_group) }}"
                                                  class="form-control" placeholder="Blood Group" required>
                                              <div style="color: red;">
@@ -161,7 +161,7 @@
                                          </div>
                                          <div class="form-group col-md-6">
                                              <label> Height <span style="color: red">*</span> </label>
-                                             <input type="type" name="height"
+                                             <input type="text" name="height"
                                                  value="{{ old('height', $getRecord->height) }}" class="form-control"
                                                  placeholder="Height" required>
                                              <div style="color: red;">
@@ -170,7 +170,7 @@
                                          </div>
                                          <div class="form-group col-md-6">
                                              <label> Weight <span style="color: red">*</span> </label>
-                                             <input type="type" name="weight"
+                                             <input type="text" name="weight"
                                                  value="{{ old('weight', $getRecord->weight) }}" class="form-control"
                                                  placeholder="Weight" required>
                                              <div style="color: red;">

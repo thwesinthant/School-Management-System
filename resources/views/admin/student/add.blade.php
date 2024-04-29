@@ -95,7 +95,7 @@
                                          </div>
                                          <div class="form-group col-md-6">
                                              <label> Caste <span style="color: red">*</span> </label>
-                                             <input type="type" name="caste" value="{{ old('caste') }}"
+                                             <input type="text" name="caste" value="{{ old('caste') }}"
                                                  class="form-control" placeholder=" Caste" required>
                                              <div style="color: red;">
                                                  {{ $errors->first('caste') }}
@@ -111,7 +111,7 @@
                                          </div>
                                          <div class="form-group col-md-6">
                                              <label> Mobile Number <span style="color: red">*</span> </label>
-                                             <input type="type" name="mobile_number" value="{{ old('mobile_number') }}"
+                                             <input type="text" name="mobile_number" value="{{ old('mobile_number') }}"
                                                  class="form-control" placeholder="Mobile Number" required>
                                              <div style="color: red;">
                                                  {{ $errors->first('mobile_number') }}
@@ -136,7 +136,7 @@
                                          </div>
                                          <div class="form-group col-md-6">
                                              <label> Blood Group <span style="color: red">*</span> </label>
-                                             <input type="type" name="blood_group" value="{{ old('blood_group') }}"
+                                             <input type="text" name="blood_group" value="{{ old('blood_group') }}"
                                                  class="form-control" placeholder="Blood Group" required>
                                              <div style="color: red;">
                                                  {{ $errors->first('blood_group') }}
@@ -144,7 +144,7 @@
                                          </div>
                                          <div class="form-group col-md-6">
                                              <label> Height <span style="color: red">*</span> </label>
-                                             <input type="type" name="height" value="{{ old('height') }}"
+                                             <input type="text" name="height" value="{{ old('height') }}"
                                                  class="form-control" placeholder="Height" required>
                                              <div style="color: red;">
                                                  {{ $errors->first('height') }}
@@ -152,7 +152,7 @@
                                          </div>
                                          <div class="form-group col-md-6">
                                              <label> Weight <span style="color: red">*</span> </label>
-                                             <input type="type" name="weight" value="{{ old('weight') }}"
+                                             <input type="text" name="weight" value="{{ old('weight') }}"
                                                  class="form-control" placeholder="Weight" required>
                                              <div style="color: red;">
                                                  {{ $errors->first('weight') }}
