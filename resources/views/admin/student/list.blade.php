@@ -205,7 +205,7 @@
                                                  <td>{{ $value->status == 0 ? 'Active' : 'Inactive' }}</td>
                                                  <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}
                                                  </td>
-                                                 <td style="text-align: center;min-width:150px">
+                                                 <td style="text-align: center;min-width:140px">
                                                      <a href="{{ url('admin/student/edit', $value->id) }}"
                                                          class="btn btn-primary btn-sm">Edit</a>
                                                      <a href="{{ url('admin/student/delete', $value->id) }}"

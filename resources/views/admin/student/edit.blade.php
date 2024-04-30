@@ -146,7 +146,7 @@
                                              <div style="color: red;" {{ $errors->first('profile_pic') }}>
                                                  @if (!empty($getRecord->getProfile()))
                                                      <img src="{{ $getRecord->getProfile() }}" alt="profile_pic"
-                                                         style="width: auto ;height:50px;">
+                                                         style="width: auto ;height:70px;">
                                                  @endif
                                              </div>
                                          </div>
@@ -205,8 +205,8 @@
                                      </div>
                                      <div class="form-group" style="margin-top:1rem;">
                                          <label>Password <span style="color: red">*</span> </label>
-                                         <input type="password" name="password" value="{{ old('password') }}"
-                                             class="form-control" placeholder="Password" required>
+                                         <input type="password" name="password" class="form-control"
+                                             placeholder="Password">
                                          <div>Due you want to change password so Please add new password</div>
                                      </div>
                                  </div>
