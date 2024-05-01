@@ -149,11 +149,13 @@
                                                  <td>{{ $value->status == 0 ? 'Active' : 'Inactive' }}</td>
                                                  <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}
                                                  </td>
-                                                 <td style="text-align: center;min-width:140px;">
+                                                 <td style="text-align: center;min-width:250px;">
                                                      <a href="{{ url('admin/parent/edit', $value->id) }}"
                                                          class="btn btn-primary btn-sm">Edit</a>
                                                      <a href="{{ url('admin/parent/delete', $value->id) }}"
                                                          class="btn btn-danger btn-sm">Delete</a>
+                                                     <a href="{{ url('admin/parent/my_student', $value->id) }}"
+                                                         class="btn btn-primary btn-sm">My Student</a>
                                                  </td>
                                              </tr>
                                          @endforeach
