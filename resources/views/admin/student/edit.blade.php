@@ -140,9 +140,7 @@
                                          </div>
                                          <div class="form-group col-md-6">
                                              <label> Profile Pic <span style="color: red">*</span> </label>
-                                             <input type="file" name="profile_pic"
-                                                 value="{{ old('profile_pic', $getRecord->profile_pic) }}"
-                                                 class="form-control">
+                                             <input type="file" name="profile_pic" class="form-control">
                                              <div style="color: red;" {{ $errors->first('profile_pic') }}>
                                                  @if (!empty($getRecord->getProfile()))
                                                      <img src="{{ $getRecord->getProfile() }}" alt="profile_pic"

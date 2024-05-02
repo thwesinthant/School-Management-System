@@ -95,8 +95,7 @@
                                  <div class="form-group col-md-2">
                                      <label>Admission Date</label>
                                      <input type="date" name="admission_date"
-                                         value="{{ Request::get('admission_date') }}" class="form-control"
-                                         placeholder="Admission Date">
+                                         value="{{ Request::get('admission_date') }}" class="form-control">
                                  </div>
                                  <div class="form-group col-md-2">
                                      <label>Blood Group</label>
