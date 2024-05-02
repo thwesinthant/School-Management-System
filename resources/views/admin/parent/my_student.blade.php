@@ -8,7 +8,7 @@
              <div class="container-fluid">
                  <div class="row mb-2">
                      <div class="col-sm-6">
-                         <h1>Parent Student List (Total : )</h1>
+                         <h1>Parent Student List ({{ $getParent->name }} {{ $getParent->last_name }})</h1>
                      </div>
                  </div>
              </div><!-- /.container-fluid -->
@@ -80,6 +80,7 @@
                                                  <th>Profile Pic</th>
                                                  <th>Name</th>
                                                  <th>Email</th>
+                                                 <th>Parent Name</th>
                                                  <th>Created Date</th>
                                                  <th>Action</th>
                                              </tr>
@@ -96,19 +97,18 @@
                                                      </td>
                                                      <td>{{ $value->name }} {{ $value->last_name }}</td>
                                                      <td>{{ $value->email }}</td>
+                                                     <td>{{ $value->parent_name }}</td>
                                                      <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}
                                                      </td>
                                                      <td style="text-align: center;min-width:140px">
-                                                         <a href="{{ url('admin/student/edit', $value->id) }}"
-                                                             class="btn btn-primary btn-sm">Edit</a>
-                                                         <a href="{{ url('admin/student/delete', $value->id) }}"
-                                                             class="btn btn-danger btn-sm">Delete</a>
+                                                         <a href="{{ route('assign_student_parent', ['id' => $value->id, 'parent_id' => $parent_id]) }}"
+                                                             class="btn btn-primary btn-sm">Add
+                                                             Student To Parent</a>
                                                      </td>
                                                  </tr>
                                              @endforeach
                                          </tbody>
                                      </table>
-
                                  </div>
                          @endif
 
@@ -125,30 +125,34 @@
                                              <th>Profile Pic</th>
                                              <th>Name</th>
                                              <th>Email</th>
-                                             <th>Gender</th>
-                                             <th>Mobile Number</th>
-                                             <th>Occupation</th>
-                                             <th>Address</th>
-                                             <th>Status</th>
+                                             <th>Parent Name</th>
                                              <th>Created Date</th>
                                              <th>Action</th>
                                          </tr>
                                      </thead>
                                      <tbody>
-                                         <tr style="text-align: center;">
-
-                                         </tr>
-
+                                         @foreach ($getRecord as $value)
+                                             <tr style="text-align: center;">
+                                                 <td>{{ $value->id }}</td>
+                                                 <td>
+                                                     @if (!empty($value->getProfile()))
+                                                         <img src="{{ $value->getProfile() }}" alt="profile_pic"
+                                                             style="width: 50px ;height:50px; border-radius:50px;">
+                                                     @endif
+                                                 </td>
+                                                 <td>{{ $value->name }} {{ $value->last_name }}</td>
+                                                 <td>{{ $value->email }}</td>
+                                                 <td>{{ $value->parent_name }}</td>
+                                                 <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}
+                                                 </td>
+                                                 <td style="text-align: center;min-width:140px">
+                                                     <a href="{{ url('admin/parent/assign_student_parent_delete', $value->id) }}"
+                                                         class="btn btn-danger btn-sm">Delete</a>
+                                                 </td>
+                                             </tr>
+                                         @endforeach
                                      </tbody>
                                  </table>
-                                 <div style="float: right;padding:10px;">
-
-
-
-                                 </div>
-                                 <!-- /.card-body -->
-
-
                              </div>
                          </div>
                      </div>

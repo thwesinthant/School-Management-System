@@ -151,6 +151,7 @@
                                              <th>#</th>
                                              <th>Profile Pic</th>
                                              <th>Name</th>
+                                             <th>Parent Name</th>
                                              <th>Email</th>
                                              <th>Admission Number</th>
                                              <th>Roll Number</th>
@@ -181,6 +182,7 @@
                                                  </td>
 
                                                  <td>{{ $value->name }} {{ $value->last_name }}</td>
+                                                 <td>{{ $value->parent_name }}</td>
                                                  <td>{{ $value->email }}</td>
                                                  <td>{{ $value->admission_number }}</td>
                                                  <td>{{ $value->roll_number }}</td>
