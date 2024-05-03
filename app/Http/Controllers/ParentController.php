@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ClassModel;
-use App\Models\User;
-use Illuminate\Http\Request;
 use Str;
+use App\Models\User;
+use App\Models\ClassModel;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class ParentController extends Controller
@@ -153,5 +154,14 @@ class ParentController extends Controller
         $student->save();
 
         return redirect()->back()->with('success', 'Student Successfully Assign Delete');
+    }
+
+    public function myStudentParent()
+    {
+        $id = Auth::user()->id;
+        $data['getRecord'] = User::getMyStudent($id);
+
+        $data['header_title'] = "My Student";
+        return view('parent.my_student', $data);
     }
 }
