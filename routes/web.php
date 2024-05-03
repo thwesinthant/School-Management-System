@@ -35,6 +35,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('admin/admin/edit/{id}', [AdminController::class, 'update']);
     Route::get('admin/admin/delete/{id}', [AdminController::class, 'delete']);
 
+
     // teacher
     Route::get('admin/teacher/list', [TeacherController::class, 'list']);
     Route::get('admin/teacher/add', [TeacherController::class, 'add']);
@@ -62,8 +63,6 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/parent/assign_student_parent/{id}/{parent_id}', [ParentController::class, 'AssignStudentParent'])->name('assign_student_parent');
     Route::get('admin/parent/assign_student_parent_delete/{student_id}', [ParentController::class, 'AssignStudentParentDelete']);
 
-
-
     // class url
     Route::get('admin/class/list', [ClassController::class, 'list']);
     Route::get('admin/class/add', [ClassController::class, 'add']);
@@ -89,6 +88,10 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/assign_subject/edit_single/{id}', [ClassSubjectController::class, 'edit_single']);
     Route::post('admin/assign_subject/edit_single/{id}', [ClassSubjectController::class, 'update_single']);
     Route::get('admin/assign_subject/delete/{id}', [ClassSubjectController::class, 'delete']);
+
+    // my account
+    Route::get('admin/account', [UserController::class, 'MyAccount']);
+    Route::post('admin/account', [UserController::class, 'UpdateMyAccountAdmin']);
 
     // change password
     Route::get('admin/change_password', [UserController::class, 'change_password']);
