@@ -121,6 +121,12 @@ Route::group(['middleware' => 'student'], function () {
 
 Route::group(['middleware' => 'parent'], function () {
     Route::get('parent/dashboard', [DashboardController::class, 'dashboard']);
+
+
+    // my account
+    Route::get('parent/account', [UserController::class, 'MyAccount']);
+    Route::post('parent/account', [UserController::class, 'UpdateMyAccountParent']);
+
     // change password
     Route::get('parent/change_password', [UserController::class, 'change_password']);
     Route::post('parent/change_password', [UserController::class, 'update_change_password']);
