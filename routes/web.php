@@ -135,6 +135,8 @@ Route::group(['middleware' => 'parent'], function () {
 
     // my student
     Route::get('parent/my_student', [ParentController::class, 'myStudentParent']);
+    Route::get('parent/my_student_subject/{student_id}', [SubjectController::class, 'ParentStudentSubject']);
+
 
     // change password
     Route::get('parent/change_password', [UserController::class, 'change_password']);

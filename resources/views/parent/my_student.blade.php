@@ -85,8 +85,8 @@
                                                  </td>
                                                  </td>
                                                  <td style="text-align: center;min-width:140px">
-                                                     <a href="{{ url('admin/parent/assign_student_parent_delete', $value->id) }}"
-                                                         class="btn btn-danger btn-sm">Delete</a>
+                                                     <a href="{{ url('parent/my_student_subject', $value->id) }}"
+                                                         class="btn btn-primary btn-sm">Subject</a>
                                                  </td>
                                              </tr>
                                          @endforeach
