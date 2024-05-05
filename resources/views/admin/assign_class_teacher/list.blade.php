@@ -34,7 +34,7 @@
                              <div class="card-body p-0">
                                  <table class="table table-striped">
                                      <thead>
-                                         <tr style="text-align: center;">
+                                         <tr>
                                              <th>#</th>
                                              <th>Class Name</th>
                                              <th>Teacher Name</th>
@@ -49,7 +49,9 @@
                                              <tr>
                                                  <td>{{ $value->id }}</td>
                                                  <td>{{ $value->class_name }}</td>
-                                                 <td>{{ $value->teacher_name }}</td>
+                                                 <td>{{ $value->teacher_name }}
+                                                     {{ $value->teacher_lastName }}
+                                                 </td>
                                                  <td>
                                                      @if ($value->status == 0)
                                                          Active
@@ -60,7 +62,11 @@
                                                  <td>{{ $value->created_by_name }}</td>
                                                  <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}
                                                  </td>
-                                                 <td style="text-align: center; ">
+                                                 <td>
+                                                     <a href="{{ url('admin/assign_class_teacher/edit', $value->id) }}"
+                                                         class="btn btn-primary">Edit</a>
+                                                     <a href="{{ url('admin/assign_class_teacher/edit_single', $value->id) }}"
+                                                         class="btn btn-primary">Edit Single</a>
                                                  </td>
                                              </tr>
                                          @endforeach
