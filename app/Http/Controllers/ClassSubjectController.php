@@ -115,10 +115,9 @@ class ClassSubjectController extends Controller
             $save->status = $request->status;
             $save->save();
 
-            return redirect('admin/assign_subject/list')->with('success', ' Subject Successfully Assign to Class');
+            return redirect('admin/assign_subject/list')->with('success', ' Assign Class to Subject Successfully Updated');
         }
     }
-
 
     public function delete($id)
     {
