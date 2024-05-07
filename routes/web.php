@@ -1,16 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\TeacherController;
-use App\Http\Controllers\StudentController;
-use App\Http\Controllers\ParentController;
 use App\Http\Controllers\ClassController;
+use App\Http\Controllers\ParentController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ClassSubjectController;
+use App\Http\Controllers\ClassTimetableController;
 use App\Http\Controllers\AssignClassTeacherController;
 
 
@@ -90,6 +91,9 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('admin/assign_subject/edit_single/{id}', [ClassSubjectController::class, 'update_single']);
     Route::get('admin/assign_subject/delete/{id}', [ClassSubjectController::class, 'delete']);
 
+    // class timetable
+    Route::get('admin/class_timetable/list', [ClassTimetableController::class, 'list']);
+
     // assign class teacher
     Route::get('admin/assign_class_teacher/list', [AssignClassTeacherController::class, 'list']);
     Route::get('admin/assign_class_teacher/add', [AssignClassTeacherController::class, 'add']);
@@ -117,7 +121,8 @@ Route::group(['middleware' => 'teacher'], function () {
     Route::post('teacher/account', [UserController::class, 'UpdateMyAccount']);
 
     // my student
-    Route::get('teacher/my_student', [StudentController::class, 'MyStudent']);
+    Route::get('teacher/my_student', [StudentController::class, 'MyStudent
+    ']);
 
     // my class & subject
     Route::get('teacher/my_class_subject', [AssignClassTeacherController::class, 'MyClassSubject']);
