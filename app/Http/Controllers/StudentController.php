@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\ClassModel;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
@@ -166,5 +167,13 @@ class StudentController extends Controller
         } else {
             abort(404);
         }
+    }
+
+    // teacher side word
+    public function MyStudent()
+    {
+        $data['getRecord'] = User::getTeacherStudent(Auth::user()->id);
+        $data['header_title'] = "My Student";
+        return view('teacher.my_student', $data);
     }
 }
