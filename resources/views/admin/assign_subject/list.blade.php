@@ -8,7 +8,7 @@
              <div class="container-fluid">
                  <div class="row mb-2">
                      <div class="col-sm-6">
-                         <h1>Assign Subject List </h1>
+                         <h1>Assign Subject List (Total : {{ $getRecord->total() }}) </h1>
                      </div>
                      <div class="col-sm-6" style="text-align: right">
                          <a class="btn btn-primary" href="{{ url('admin/assign_subject/add') }}">Add New Assign Subject</a>
