@@ -25,19 +25,27 @@
                      <form action="" method="get">
                          <div class="card-body">
                              <div class="row">
-                                 <div class="form-group col-md-2">
+                                 <div class="form-group col-md-3">
                                      <label>Class Name</label>
-                                     <select class="form-control">
+                                     <select class="form-control getClass" name="class_id" required>
                                          <option value="">Select</option>
                                          @foreach ($getClass as $class)
-                                             <option value="{{ $class->id }}">{{ $class->name }}</option>
+                                             <option {{ Request::get('class_id') == $class->id ? 'selected' : '' }}
+                                                 value="{{ $class->id }}">{{ $class->name }}</option>
                                          @endforeach
                                      </select>
                                  </div>
-                                 <div class="form-group col-md-2">
-                                     <label>Teacher Name</label>
-                                     <input type="text" name="teacher_name" value="{{ Request::get('teacher_name') }}"
-                                         class="form-control" placeholder="Teacher name">
+                                 <div class="form-group col-md-3">
+                                     <label>Subject Name</label>
+                                     <select class="form-control getSubject" name="subject_id" required>
+                                         <option value="">Select</option>
+                                         @if (!empty($getSubject))
+                                             @foreach ($getSubject as $subject)
+                                                 <option {{ Request::get('subject_id') == $subject->id ? 'selected' : '' }}
+                                                     value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                             @endforeach
+                                         @endif
+                                     </select>
                                  </div>
                                  <div class="form-group col-md-3" style="margin-top:30px;">
                                      <button type="submit" class="btn btn-primary">Search</button>
@@ -68,4 +76,26 @@
          <!-- /.content -->
      </div>
      <!-- /.content-wrapper -->
+
+ @section('script')
+     <script type="text/javascript">
+         $('.getClass').change(function() {
+             // getting selected option value
+             var class_id = $(this).val();
+             // console.log(value); // get class id like 1 , 2 ,3
+
+             $.ajax({
+                 type: "POST",
+                 url: "{{ url('admin/class_timetable/get_subject') }}",
+                 data: {
+                     "_token": "{{ csrf_token() }}",
+                     class_id: class_id,
+                 },
+                 dataType: "json",
+                 success: function(response) {
+                     $('.getSubject').html(response.html);
+                 }
+             });
+         });
+     </script>
  @endsection

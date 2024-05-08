@@ -42,7 +42,6 @@ class ClassSubjectModel extends Model
         return $return;
     }
 
-
     static public function MySubject($class_id)
     {
         return  self::select('class_subject.*', 'subject.name as subject_name', 'subject.type as subject_type')
