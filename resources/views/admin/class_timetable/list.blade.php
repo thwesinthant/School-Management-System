@@ -11,7 +11,8 @@
                          <h1>Class Timetable </h1>
                      </div>
                  </div>
-             </div><!-- /.container-fluid -->
+             </div>
+             <!-- /.container-fluid -->
          </section>
 
          {{-- Search Assign Class Teacher Form --}}
@@ -41,8 +42,10 @@
                                          <option value="">Select</option>
                                          @if (!empty($getSubject))
                                              @foreach ($getSubject as $subject)
-                                                 <option {{ Request::get('subject_id') == $subject->id ? 'selected' : '' }}
-                                                     value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                                 <option
+                                                     {{ Request::get('subject_id') == $subject->subject_id ? 'selected' : '' }}
+                                                     value="{{ $subject->subject_id }}">{{ $subject->subject_name }}
+                                                 </option>
                                              @endforeach
                                          @endif
                                      </select>
@@ -60,22 +63,52 @@
              </div>
          </div>
 
-         <!-- Main content -->
-         <section class="content">
-             <div class="container-fluid">
-                 <div class="row">
-                     <div class="col-md-12">
-
-
-                     </div>
-                     <!-- /.col -->
+         {{-- TimeTable --}}
+         @if (!empty(Request::get('class_id')) && !empty(Request::get('subject_id')))
+             <div class="card">
+                 <div class="card-header">
+                     <h3 class="card-title">Class Timetable</h3>
                  </div>
+                 <!-- /.card-header -->
+                 <div class="card-body p-0">
+                     <table class="table table-striped">
+                         <thead>
+                             <tr>
+                                 <th>Week</th>
+                                 <th>Start Time</th>
+                                 <th>End Time</th>
+                                 <th>Room Number</th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                             @foreach ($week as $value)
+                                 <tr>
+                                     <td>{{ $value['week_name'] }}</td>
+                                     <td>
+                                         <input type="time" name="start_time" class="form-control">
+                                     </td>
+                                     <td>
+                                         <input type="time" name="end_time" class="form-control">
+                                     </td>
+                                     <td>
+                                         <input type="text" style="width: 200px" name="room_number" class="form-control">
+                                     </td>
+                                 </tr>
+                             @endforeach
+                         </tbody>
+                     </table>
+                     <div style="text-align: center;padding:20px;">
+                         <button class="btn btn-primary">Submit</button>
+                     </div>
+                 </div>
+                 <!-- /.card-body -->
              </div>
-             <!-- /.container-fluid -->
-         </section>
-         <!-- /.content -->
+         @endif
+         {{-- TimeTable --}}
+
      </div>
      <!-- /.content-wrapper -->
+ @endsection
 
  @section('script')
      <script type="text/javascript">

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ClassModel;
 use App\Models\ClassSubjectModel;
-
+use App\Models\WeekModel;
 use Illuminate\Http\Request;
 
 class ClassTimetableController extends Controller
@@ -16,6 +16,17 @@ class ClassTimetableController extends Controller
         if (!empty($request->class_id)) {
             $data['getSubject'] = ClassSubjectModel::MySubject($request->class_id);
         }
+
+        $getWeek = WeekModel::getRecord();
+        $week = array();
+        foreach ($getWeek as $value) {
+            $dataW = array();
+            $dataW['week_id'] = $value->id;
+            $dataW['week_name'] = $value->name;
+            $week[] = $dataW;
+        }
+
+        $data['week'] = $week;
 
         $data['header_title'] = "Class Timetable List";
         return view('admin.class_timetable.list', $data);

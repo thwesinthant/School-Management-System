@@ -124,10 +124,8 @@
                  </div>
                  <!-- /.col -->
              </div>
-     </div>
-     <!-- /.container-fluid -->
-     </section>
-     <!-- /.content -->
+         </section>
+         <!-- /.content -->
      </div>
      <!-- /.content-wrapper -->
  @endsection
