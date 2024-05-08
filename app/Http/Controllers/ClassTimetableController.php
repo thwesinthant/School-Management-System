@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ClassModel;
 use App\Models\ClassSubjectModel;
 use App\Models\WeekModel;
+use App\Models\ClassSubjectTimetableModel;
 use Illuminate\Http\Request;
 
 class ClassTimetableController extends Controller
@@ -44,5 +45,23 @@ class ClassTimetableController extends Controller
 
         $json['html'] = $html;
         echo json_encode($json);
+    }
+
+    public function insert_update(Request $request)
+    {
+        ClassSubjectTimetableModel::where('class_id', '=', $request->class_id)->where('subject_id', '=', $request->subject_id)->delete();
+        foreach ($request->timetable as $timetable) {
+            if (!empty($timetable['week_id']) && !empty($timetable['start_time']) && !empty($timetable['end_time']) && !empty($timetable['room_number'])) {
+                $save = new ClassSubjectTimetableModel;
+                $save->class_id = $request->class_id;
+                $save->subject_id = $request->subject_id;
+                $save->week_id = $timetable['week_id'];
+                $save->start_time = $timetable['start_time'];
+                $save->end_time = $timetable['end_time'];
+                $save->room_number = $timetable['room_number'];
+                $save->save();
+            }
+        }
+        return redirect()->back()->with('success', 'Class Timetable Successfully Saved');
     }
 }
