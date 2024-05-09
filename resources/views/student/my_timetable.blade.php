@@ -42,17 +42,16 @@
                                                  <tr>
                                                      <td>{{ $valueW['week_name'] }}</td>
                                                      <td>
-                                                         {{ $valueW['start_time'] }}
+                                                         {{ !empty($valueW['start_time']) ? date('h:i A', strtotime($valueW['start_time'])) : '' }}
                                                      </td>
                                                      <td>
-                                                         {{ $valueW['end_time'] }}
+                                                         {{ !empty($valueW['start_time']) ? date('h:i A', strtotime($valueW['end_time'])) : '' }}
                                                      </td>
                                                      <td>{{ $valueW['room_number'] }}</td>
                                                  </tr>
                                              @endforeach
                                          </tbody>
                                      </table>
-
                                  </div>
                                  <!-- /.card-body -->
                              </div>

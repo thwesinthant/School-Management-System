@@ -88,6 +88,7 @@ class ClassTimetableController extends Controller
     {
         $result = array();
         $getRecord = ClassSubjectModel::MySubject(Auth::user()->class_id);
+
         foreach ($getRecord as $value) {
             $dataS['name'] = $value->subject_name;
 
@@ -113,7 +114,6 @@ class ClassTimetableController extends Controller
             $dataS['week'] = $week;
             $result[] = $dataS;
         }
-
         $data['getRecord'] = $result;
         $data['header_title'] = "My Timetable";
         return view('student.my_timetable', $data);
