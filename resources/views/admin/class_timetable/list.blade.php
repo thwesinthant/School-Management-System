@@ -18,6 +18,8 @@
          {{-- Search Assign Class Teacher Form --}}
          <div class="row" style="margin:7.5px ">
              <div class="col-md-12">
+                 @include('message')
+
                  <div class="card">
                      <div class="card-header">
                          <h3 class="card-title">Search Class Timetable</h3>
@@ -64,77 +66,65 @@
          </div>
 
          {{-- TimeTable --}}
-         <section class="content">
-             <div class="container-fluid">
-                 <div class="row">
-                     <div class="col-md-12">
-                         @include('message')
-                         @if (!empty(Request::get('class_id')) && !empty(Request::get('subject_id')))
-                             <form action="{{ url('admin/class_timetable/add') }}" method="post">
-                                 {{ csrf_field() }}
-                                 <input type="hidden" name="class_id" value="{{ Request::get('class_id') }}">
-                                 <input type="hidden" name="subject_id" value="{{ Request::get('subject_id') }}">
+         @if (!empty(Request::get('class_id')) && !empty(Request::get('subject_id')))
+             <form action="{{ url('admin/class_timetable/add') }}" method="post">
+                 {{ csrf_field() }}
+                 <input type="hidden" name="class_id" value="{{ Request::get('class_id') }}">
+                 <input type="hidden" name="subject_id" value="{{ Request::get('subject_id') }}">
 
-                                 <div class="card">
-                                     <div class="card-header">
-                                         <h3 class="card-title">Class Timetable</h3>
-                                     </div>
-                                     <!-- /.card-header -->
-                                     <div class="card-body p-0">
-                                         <table class="table table-striped">
-                                             <thead>
-                                                 <tr>
-                                                     <th>Week</th>
-                                                     <th>Start Time</th>
-                                                     <th>End Time</th>
-                                                     <th>Room Number</th>
-                                                 </tr>
-                                             </thead>
-                                             <tbody>
-                                                 @php
-                                                     $i = 1;
-                                                 @endphp
-                                                 @foreach ($week as $value)
-                                                     <tr>
-                                                         <td>
-                                                             <input type="hidden"
-                                                                 name="timetable[{{ $i }}][week_id]"
-                                                                 value="{{ $value['week_id'] }}">
-                                                             {{ $value['week_name'] }}
-                                                         </td>
-                                                         <td>
-                                                             <input type="time"
-                                                                 name="timetable[{{ $i }}][start_time]"
-                                                                 class="form-control">
-                                                         </td>
-                                                         <td>
-                                                             <input type="time"
-                                                                 name="timetable[{{ $i }}][end_time]"
-                                                                 class="form-control">
-                                                         </td>
-                                                         <td>
-                                                             <input type="text" style="width: 200px"
-                                                                 name="timetable[{{ $i }}][room_number]"
-                                                                 class="form-control">
-                                                         </td>
-                                                     </tr>
-                                                     @php
-                                                         $i++;
-                                                     @endphp
-                                                 @endforeach
-                                             </tbody>
-                                         </table>
-                                         <div style="text-align: center;padding:20px;">
-                                             <button class="btn btn-primary">Submit</button>
-                                         </div>
-                                     </div>
-                                     <!-- /.card-body -->
-                                 </div>
-                             </form>
+                 <div class="card">
+                     <div class="card-header">
+                         <h3 class="card-title">Class Timetable</h3>
                      </div>
+                     <!-- /.card-header -->
+                     <div class="card-body p-0">
+                         <table class="table table-striped">
+                             <thead>
+                                 <tr>
+                                     <th>Week</th>
+                                     <th>Start Time</th>
+                                     <th>End Time</th>
+                                     <th>Room Number</th>
+                                 </tr>
+                             </thead>
+                             <tbody>
+                                 @php
+                                     $i = 1;
+                                 @endphp
+                                 @foreach ($week as $value)
+                                     <tr>
+                                         <td>
+                                             <input type="hidden" name="timetable[{{ $i }}][week_id]"
+                                                 value="{{ $value['week_id'] }}">
+                                             {{ $value['week_name'] }}
+                                         </td>
+                                         <td>
+                                             <input type="time" name="timetable[{{ $i }}][start_time]"
+                                                 value="{{ $value['start_time'] }}" class="form-control">
+                                         </td>
+                                         <td>
+                                             <input type="time" name="timetable[{{ $i }}][end_time]"
+                                                 value="{{ $value['end_time'] }}" class="form-control">
+                                         </td>
+                                         <td>
+                                             <input type="text" style="width: 200px"
+                                                 name="timetable[{{ $i }}][room_number]"
+                                                 value="{{ $value['room_number'] }}" class="form-control">
+                                         </td>
+                                     </tr>
+                                     @php
+                                         $i++;
+                                     @endphp
+                                 @endforeach
+                             </tbody>
+                         </table>
+                         <div style="text-align: center;padding:20px;">
+                             <button class="btn btn-primary">Submit</button>
+                         </div>
+                     </div>
+                     <!-- /.card-body -->
                  </div>
-             </div>
-         </section>
+             </form>
          @endif
          {{-- TimeTable --}}
 

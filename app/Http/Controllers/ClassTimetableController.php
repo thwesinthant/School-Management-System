@@ -24,12 +24,30 @@ class ClassTimetableController extends Controller
             $dataW = array();
             $dataW['week_id'] = $value->id;
             $dataW['week_name'] = $value->name;
+
+            if (!empty($request->class_id) && !empty($request->subject_id)) {
+                $ClassSubject = ClassSubjectTimetableModel::getRecordClassSubject($request->class_id, $request->subject_id, $value->id);
+                if (!empty($ClassSubject)) {
+                    $dataW['start_time'] = $ClassSubject->start_time;
+                    $dataW['end_time'] = $ClassSubject->end_time;
+                    $dataW['room_number'] = $ClassSubject->room_number;
+                } else {
+                    $dataW['start_time'] = '';
+                    $dataW['end_time'] = '';
+                    $dataW['room_number'] = '';
+                }
+            } else {
+                $dataW['start_time'] = '';
+                $dataW['end_time'] = '';
+                $dataW['room_number'] = '';
+            }
+
             $week[] = $dataW;
         }
 
         $data['week'] = $week;
 
-        $data['header_title'] = "Class Timetable List";
+        $data['header_title'] = "Class Timetable";
         return view('admin.class_timetable.list', $data);
     }
 
