@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\WeekModel;
 use App\Models\ClassModel;
+use App\Models\SubjectModel;
 use Illuminate\Http\Request;
 use App\Models\ClassSubjectModel;
 use Illuminate\Support\Facades\Auth;
@@ -121,33 +122,27 @@ class ClassTimetableController extends Controller
 
     public function MyTimetableTable($class_id, $subject_id)
     {
-        $result = array();
-        $getRecord = ClassSubjectModel::MySubject(Auth::user()->class_id);
+        $data['getClass'] = ClassModel::getSingle($class_id);
+        $data['getSubject'] = SubjectModel::getSingle($subject_id);
 
-        foreach ($getRecord as $value) {
-            $dataS['name'] = $value->subject_name;
+        $getWeek = WeekModel::getRecord();
+        $week = array();
 
-            $getWeek = WeekModel::getRecord();
-            $week = array();
+        foreach ($getWeek as $valueW) {
+            $dataW = array();
+            $dataW['week_name'] = $valueW->name;
 
-            foreach ($getWeek as $valueW) {
-                $dataW = array();
-                $dataW['week_name'] = $valueW->name;
-
-                $ClassSubject = ClassSubjectTimetableModel::getRecordClassSubject($value->class_id, $value->subject_id, $valueW->id);
-                if (!empty($ClassSubject)) {
-                    $dataW['start_time'] = $ClassSubject->start_time;
-                    $dataW['end_time'] = $ClassSubject->end_time;
-                    $dataW['room_number'] = $ClassSubject->room_number;
-                } else {
-                    $dataW['start_time'] = '';
-                    $dataW['end_time'] = ' ';
-                    $dataW['room_number'] = '';
-                }
-                $week[] = $dataW;
+            $ClassSubject = ClassSubjectTimetableModel::getRecordClassSubject($class_id, $subject_id, $valueW->id);
+            if (!empty($ClassSubject)) {
+                $dataW['start_time'] = $ClassSubject->start_time;
+                $dataW['end_time'] = $ClassSubject->end_time;
+                $dataW['room_number'] = $ClassSubject->room_number;
+            } else {
+                $dataW['start_time'] = '';
+                $dataW['end_time'] = ' ';
+                $dataW['room_number'] = '';
             }
-            $dataS['week'] = $week;
-            $result[] = $dataS;
+            $result[] = $dataW;
         }
         $data['getRecord'] = $result;
         $data['header_title'] = "My Timetable";
