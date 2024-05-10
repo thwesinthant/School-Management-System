@@ -129,6 +129,7 @@ Route::group(['middleware' => 'teacher'], function () {
 
     // my class & subject
     Route::get('teacher/my_class_subject', [AssignClassTeacherController::class, 'MyClassSubject']);
+    Route::get('teacher/my_class_subject/class_timetable/{class_id}/{subject_id}', [ClassTimetableController::class, 'MyTimetableTable'])->name('teacher_class_timetable');
 
     // change password
     Route::get('teacher/change_password', [UserController::class, 'change_password']);
