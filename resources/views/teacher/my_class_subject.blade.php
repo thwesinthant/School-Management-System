@@ -33,6 +33,7 @@
                                              <th>Class Name</th>
                                              <th>Subject Name</th>
                                              <th>Subject Type</th>
+                                             <th>My Class Timetable</th>
                                              <th>Created Date</th>
                                              <th>Action</th>
                                          </tr>
@@ -43,7 +44,22 @@
                                                  <td>{{ $value->class_name }}</td>
                                                  <td>{{ $value->subject_name }}</td>
                                                  <td>{{ $value->subject_type }}</td>
-                                                 <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}
+                                                 <td>
+                                                     @php
+                                                         $ClassSubject = $value->getMyTimeTable(
+                                                             $value->class_id,
+                                                             $value->subject_id,
+                                                         );
+                                                     @endphp
+                                                     @if (!empty($ClassSubject))
+                                                         {{ date('h:i A', strtotime($ClassSubject->start_time)) }} to
+                                                         {{ date('h:i A', strtotime($ClassSubject->end_time)) }}
+                                                         <br>
+                                                         Room Number : {{ $ClassSubject->room_number }}
+                                                     @endif
+                                                 </td>
+                                                 <td>
+                                                     {{ date('d-m-Y H:i A', strtotime($value->created_at)) }}
                                                  <td>
                                                      <a href="{{ route('teacher_class_timetable', ['class_id' => $value->class_id, 'subject_id' => $value->subject_id]) }}"
                                                          class="btn btn-primary">My Class Timetable</a>
