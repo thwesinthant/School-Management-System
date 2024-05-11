@@ -35,13 +35,18 @@
                                          <tr>
                                              <th>Subject Name</th>
                                              <th>Subject Type</th>
+                                             <th>Action</th>
                                          </tr>
                                      </thead>
                                      <tbody>
                                          @foreach ($getRecord as $value)
                                              <tr>
-                                                 <th style="font-weight: normal">{{ $value->subject_name }}</th>
-                                                 <th style="font-weight: normal">{{ $value->subject_type }}</th>
+                                                 <td style="font-weight: normal">{{ $value->subject_name }}</td>
+                                                 <td style="font-weight: normal">{{ $value->subject_type }}</td>
+                                                 <td>
+                                                     <a href="{{ route('parent_class_timetable', ['class_id' => $value->class_id, 'subject_id' => $value->subject_id]) }}"
+                                                         class="btn btn-primary">My Class Timetable</a>
+                                                 </td>
                                              </tr>
                                          @endforeach
                                      </tbody>

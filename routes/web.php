@@ -163,8 +163,10 @@ Route::group(['middleware' => 'parent'], function () {
 
     // my student
     Route::get('parent/my_student', [ParentController::class, 'myStudentParent']);
-    Route::get('parent/my_student_subject/{student_id}', [SubjectController::class, 'ParentStudentSubject']);
+    Route::get('parent/my_student/subject/{student_id}', [SubjectController::class, 'ParentStudentSubject']);
 
+    // my student subject timetable
+    Route::get('parent/my_student/subject/class_timetable/{class_id}/{subject_id}', [ClassTimetableController::class, 'MyTimetableTable'])->name('parent_class_timetable');
 
     // change password
     Route::get('parent/change_password', [UserController::class, 'change_password']);
