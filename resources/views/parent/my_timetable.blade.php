@@ -7,13 +7,13 @@
          <section class="content-header">
              <div class="container-fluid">
                  <div class="row mb-2">
-                     <div class="col-sm-6">
-                         <h1> Student Subject <span style="color: blue">({{ $getUser->name }}
-                                 {{ $getUser->last_name }})</span>
-                         </h1>
+                     <div class="col-sm-12">
+                         <h1>My Class Timetable ( {{ $getClass['name'] }} - {{ $getSubject['name'] }}) <span
+                                 style="color: blue">({{ $getStudent->name }} {{ $getStudent->last_name }})</span> </h1>
                      </div>
                  </div>
-             </div><!-- /.container-fluid -->
+             </div>
+             <!-- /.container-fluid -->
          </section>
 
          <!-- Main content -->
@@ -21,45 +21,44 @@
              <div class="container-fluid">
                  <div class="row">
                      <div class="col-md-12">
-
-                         @include('message')
-
                          <div class="card">
                              <div class="card-header">
-                                 <h3 class="card-title">Student Subject</h3>
+                                 <h3 class="card-title">{{ $getClass['name'] }} - {{ $getSubject['name'] }} </h3>
                              </div>
                              <!-- /.card-header -->
                              <div class="card-body p-0">
                                  <table class="table table-striped">
                                      <thead>
                                          <tr>
-                                             <th>Subject Name</th>
-                                             <th>Subject Type</th>
-                                             <th>Action</th>
+                                             <th>Week</th>
+                                             <th>Start Time</th>
+                                             <th>End Time</th>
+                                             <th>Room Number</th>
                                          </tr>
                                      </thead>
                                      <tbody>
-                                         @foreach ($getRecord as $value)
+                                         @foreach ($getRecord as $valueW)
                                              <tr>
-                                                 <td style="font-weight: normal">{{ $value->subject_name }}</td>
-                                                 <td style="font-weight: normal">{{ $value->subject_type }}</td>
+                                                 <td>{{ $valueW['week_name'] }}</td>
                                                  <td>
-                                                     <a href="{{ route('parent_class_timetable', ['class_id' => $value->class_id, 'subject_id' => $value->subject_id, 'student_id' => $getUser->id]) }}"
-                                                         class="btn btn-primary">My Class Timetable</a>
+                                                     {{ !empty($valueW['start_time']) ? date('h:i A', strtotime($valueW['start_time'])) : '' }}
                                                  </td>
+                                                 <td>
+                                                     {{ !empty($valueW['start_time']) ? date('h:i A', strtotime($valueW['end_time'])) : '' }}
+                                                 </td>
+                                                 <td>{{ $valueW['room_number'] }}</td>
                                              </tr>
                                          @endforeach
                                      </tbody>
                                  </table>
                              </div>
+                             <!-- /.card-body -->
                          </div>
                      </div>
-                     <!-- /.col -->
                  </div>
              </div>
-             <!-- /.container-fluid -->
          </section>
-         <!-- /.content -->
+
      </div>
      <!-- /.content-wrapper -->
  @endsection
