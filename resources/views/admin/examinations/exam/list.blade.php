@@ -30,7 +30,7 @@
                                  <div class="form-group col-md-3">
                                      <label>Exam Name</label>
                                      <input type="text" name="name" value="{{ Request::get('name') }}"
-                                         class="form-control" placeholder="Enter name">
+                                         class="form-control" placeholder="Exam Name">
                                  </div>
 
                                  <div class="form-group col-md-3" style="margin-bottom:0px;">

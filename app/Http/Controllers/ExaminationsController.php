@@ -54,4 +54,16 @@ class ExaminationsController extends Controller
 
         return redirect('admin/examinations/exam/list')->with('success', 'Exam Successfully Updated');
     }
+
+    public function exam_delete($id)
+    {
+        $getRecord = ExamModel::getSingle($id);
+        if (!empty($getRecord)) {
+            $getRecord->is_delete = 1;
+            $getRecord->save();
+            return redirect()->back()->with('success', 'Exam Successfully Deleted');
+        } else {
+            abort(404);
+        }
+    }
 }
