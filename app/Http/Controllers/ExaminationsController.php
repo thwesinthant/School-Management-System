@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ClassModel;
 use App\Models\ExamModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -65,5 +66,14 @@ class ExaminationsController extends Controller
         } else {
             abort(404);
         }
+    }
+
+    public function exam_schedule()
+    {
+        $data['getClass'] = ClassModel::getClass();
+        $data['getExam'] = ExamModel::getExam();
+
+        $data['header_title'] = ' Exam Schedule';
+        return view('admin.examinations.exam_schedule', $data);
     }
 }
