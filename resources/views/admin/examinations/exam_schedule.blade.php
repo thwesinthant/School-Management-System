@@ -69,27 +69,75 @@
                      <div class="col-md-12">
                          @include('message')
 
-                         <div class="card">
-                             <div class="card-header">
-                                 <h3 class="card-title">Exam Schedule</h3>
-                             </div>
-                             <!-- /.card-header -->
-                             <div class="card-body p-0">
-                                 <table class="table table-striped">
-                                     <thead>
-                                         <tr style="text-align: center;">
-                                             <th>#</th>
-                                             <th>Exam Name</th>
-                                             <th>Note</th>
-                                             <th>Created By</th>
-                                             <th>Created Date</th>
-                                             <th>Action</th>
-                                         </tr>
-                                     </thead>
-                                 </table>
-                             </div>
-                             <!-- /.card-body -->
-                         </div>
+                         @if (!empty($getRecord))
+                             <form action="{{ url('admin/examinations/exam_schedule_insert') }}" method="post">
+                                 {{ csrf_field() }}
+                                 <input type="hidden" name="exam_id" value="{{ Request::get('exam_id') }}">
+                                 <input type="hidden" name="class_id" value="{{ Request::get('class_id') }}">
+
+                                 <div class="card">
+                                     <div class="card-header">
+                                         <h3 class="card-title">Exam Schedule</h3>
+                                     </div>
+                                     <!-- /.card-header -->
+                                     <div class="card-body p-0">
+                                         <table class="table table-striped">
+                                             <thead>
+                                                 <tr style="text-align: center;">
+                                                     <th>Subject Name</th>
+                                                     <th>Exam Date</th>
+                                                     <th>Start Time</th>
+                                                     <th>End Time</th>
+                                                     <th>Room Number</th>
+                                                     <th>Full Marks</th>
+                                                     <th>Passing Marks</th>
+                                                 </tr>
+                                             </thead>
+                                             <tbody>
+                                                 @php
+                                                     $i = 1;
+                                                 @endphp
+                                                 @foreach ($getRecord as $value)
+                                                     <tr>
+                                                         <td>{{ $value['subject_name'] }}</td>
+                                                         <td>
+                                                             <input type="time" class="form-control"
+                                                                 name="schedule[{{ $i }}][exam_date]">
+                                                         </td>
+                                                         <td>
+                                                             <input type="time" class="form-control"
+                                                                 name="schedule[{{ $i }}][start_time]">
+                                                         </td>
+                                                         <td>
+                                                             <input type="text" class="form-control"
+                                                                 name="schedule[{{ $i }}][end_time]">
+                                                         </td>
+                                                         <td>
+                                                             <input type="text" class="form-control"
+                                                                 name="schedule[{{ $i }}][room_number]">
+                                                         </td>
+                                                         <td>
+                                                             <input type="text" class="form-control"
+                                                                 name="schedule[{{ $i }}][full_marks]">
+                                                         </td>
+                                                         <td>
+                                                             <input type="text" class="form-control"
+                                                                 name="schedule[{{ $i }}][passing_marks]">
+                                                         </td>
+                                                     </tr>
+                                                     @php
+                                                         $i++;
+                                                     @endphp
+                                                 @endforeach
+
+                                             </tbody>
+                                         </table>
+                                     </div>
+                                     <!-- /.card-body -->
+                                 </div>
+                             </form>
+                         @endif
+
                          <!-- /.card -->
                      </div>
                  </div>
