@@ -99,9 +99,14 @@
                                                  @endphp
                                                  @foreach ($getRecord as $value)
                                                      <tr>
-                                                         <td>{{ $value['subject_name'] }}</td>
                                                          <td>
-                                                             <input type="time" class="form-control"
+                                                             {{ $value['subject_name'] }}
+                                                             <input type="hidden" value="{{ $value['subject_id'] }}"
+                                                                 class="form-control"
+                                                                 name="schedule[{{ $i }}][subject_id]">
+                                                         </td>
+                                                         <td>
+                                                             <input type="date" class="form-control"
                                                                  name="schedule[{{ $i }}][exam_date]">
                                                          </td>
                                                          <td>
@@ -109,7 +114,7 @@
                                                                  name="schedule[{{ $i }}][start_time]">
                                                          </td>
                                                          <td>
-                                                             <input type="text" class="form-control"
+                                                             <input type="time" class="form-control"
                                                                  name="schedule[{{ $i }}][end_time]">
                                                          </td>
                                                          <td>
@@ -122,16 +127,21 @@
                                                          </td>
                                                          <td>
                                                              <input type="text" class="form-control"
-                                                                 name="schedule[{{ $i }}][passing_marks]">
+                                                                 name="schedule[{{ $i }}][passing_mark]">
                                                          </td>
+
                                                      </tr>
                                                      @php
                                                          $i++;
                                                      @endphp
                                                  @endforeach
 
+
                                              </tbody>
                                          </table>
+                                         <div style="text-align:center; padding:20px;"> <button
+                                                 type="submit"class="btn btn-primary">Submit</button>
+                                         </div>
                                      </div>
                                      <!-- /.card-body -->
                                  </div>
