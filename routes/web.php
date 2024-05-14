@@ -159,6 +159,9 @@ Route::group(['middleware' => 'student'], function () {
     // my timetable
     Route::get('student/my_timetable', [ClassTimetableController::class, 'MyTimetable']);
 
+    // my exam timetable
+    Route::get('student/my_exam_timetable', [ExaminationsController::class, 'MyExamTimetable']);
+
     // my account
     Route::get('student/account', [UserController::class, 'MyAccount']);
     Route::post('student/account', [UserController::class, 'UpdateMyAccountStudent']);
