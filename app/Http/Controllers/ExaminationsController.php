@@ -83,10 +83,26 @@ class ExaminationsController extends Controller
                 $dataS['subject_id'] = $value->subject_id;
                 $dataS['subject_name'] = $value->subject_name;
                 $dataS['subject_type'] = $value->subject_type;
+
+                $ExamSchedule = ExamScheduleModel::getRecordSingle($request->get('exam_id'), $request->get('class_id'), $value->subject_id);
+                if (!empty($ExamSchedule)) {
+                    $dataS['exam_date']  = $ExamSchedule->exam_date;
+                    $dataS['start_time']  = $ExamSchedule->start_time;
+                    $dataS['end_time']  = $ExamSchedule->end_time;
+                    $dataS['room_number'] = $ExamSchedule->room_number;
+                    $dataS['full_marks']  = $ExamSchedule->full_marks;
+                    $dataS['passing_mark'] = $ExamSchedule->passing_mark;
+                } else {
+                    $dataS['exam_date']  = '';
+                    $dataS['start_time']  = '';
+                    $dataS['end_time']  = '';
+                    $dataS['room_number'] = '';
+                    $dataS['full_marks']  = '';
+                    $dataS['passing_mark'] = '';
+                }
                 $result[] = $dataS;
             }
         }
-
         $data['getRecord'] = $result;
         $data['header_title'] = ' Exam Schedule';
         return view('admin.examinations.exam_schedule', $data);
@@ -94,6 +110,7 @@ class ExaminationsController extends Controller
 
     public function exam_schedule_insert(Request $request)
     {
+        ExamScheduleModel::deleteRecord($request->exam_id, $request->class_id);
         if (!empty($request->schedule)) {
             foreach ($request->schedule as $schedule) {
                 if (!empty($schedule['subject_id']) && !empty($schedule['exam_date']) && !empty($schedule['start_time']) && !empty($schedule['end_time']) && !empty($schedule['room_number']) && !empty($schedule['full_marks']) && !empty($schedule['passing_mark'])) {
