@@ -177,17 +177,34 @@ class ExaminationsController extends Controller
             $dataC['class_name'] = $class->class_name;
 
             $getExam = ExamScheduleModel::getExam($class->class_id);
-            dd($getExam);
             // get data where same class_id , group by exam_id
+            $examArray = array();
             foreach ($getExam as $exam) {
                 $dataE = array();
                 $dataE['exam_name'] = $exam->exam_name;
-
                 $getExamTimetable = ExamScheduleModel::getExamTimetable($class->class_id, $exam->exam_id);
+
+                $subjectArray = array();
                 foreach ($getExamTimetable as $valueS) {
+
+                    $dataS = array();
+                    $dataS['subject_name'] = $valueS->subject_name;
+                    $dataS['exam_date'] = $valueS->exam_date;
+                    $dataS['start_time'] = $valueS->start_time;
+                    $dataS['end_time'] = $valueS->end_time;
+                    $dataS['room_number'] = $valueS->room_number;
+                    $dataS['full_marks'] = $valueS->full_marks;
+                    $dataS['passing_mark'] = $valueS->passing_mark;
+                    $subjectArray[] = $dataS;
                 }
+                $dataE['subject'] = $subjectArray;
+                $examArray[] = $dataE;
             }
+            $dataC['exam'] = $examArray;
+            $result[] = $dataC;
         }
+
+        $data['getRecord'] = $result;
         $data['header_title'] = 'My Exam Timetable';
         return view('teacher.my_exam_timetable', $data);
     }
