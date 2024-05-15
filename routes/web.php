@@ -138,12 +138,14 @@ Route::group(['middleware' => 'teacher'], function () {
     Route::post('teacher/account', [UserController::class, 'UpdateMyAccount']);
 
     // my student
-    Route::get('teacher/my_student', [StudentController::class, 'MyStudent
-    ']);
+    Route::get('teacher/my_student', [StudentController::class, 'MyStudent']);
 
     // my class & subject
     Route::get('teacher/my_class_subject', [AssignClassTeacherController::class, 'MyClassSubject']);
     Route::get('teacher/my_class_subject/class_timetable/{class_id}/{subject_id}', [ClassTimetableController::class, 'MyTimetableTable'])->name('teacher_class_timetable');
+
+    // my exam timetable
+    Route::get('teacher/my_exam_timetable', [ExaminationsController::class, 'MyExamTimetableTeacher']);
 
     // change password
     Route::get('teacher/change_password', [UserController::class, 'change_password']);

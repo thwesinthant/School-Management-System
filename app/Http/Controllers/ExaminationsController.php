@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\ClassSubjectModel;
 use App\Models\ExamScheduleModel;
 use Illuminate\Support\Facades\Auth;
+use App\Models\AssignClassTeacherModel;
 
 class ExaminationsController extends Controller
 {
@@ -163,5 +164,31 @@ class ExaminationsController extends Controller
         $data['getRecord'] = $result;
         $data['header_title'] = 'My Exam Timetable';
         return view('student.my_exam_timetable', $data);
+    }
+
+    // teacher side work
+    public function MyExamTimetableTeacher(Request $request)
+    {
+        // get login teacher's assign class id(s)
+        $getClass = AssignClassTeacherModel::getMyClassSubjectGroup(Auth::user()->id);
+
+        foreach ($getClass as $class) {
+            $dataC = array();
+            $dataC['class_name'] = $class->class_name;
+
+            $getExam = ExamScheduleModel::getExam($class->class_id);
+            dd($getExam);
+            // get data where same class_id , group by exam_id
+            foreach ($getExam as $exam) {
+                $dataE = array();
+                $dataE['exam_name'] = $exam->exam_name;
+
+                $getExamTimetable = ExamScheduleModel::getExamTimetable($class->class_id, $exam->exam_id);
+                foreach ($getExamTimetable as $valueS) {
+                }
+            }
+        }
+        $data['header_title'] = 'My Exam Timetable';
+        return view('teacher.my_exam_timetable', $data);
     }
 }
