@@ -30,7 +30,7 @@
                              <div class="card-body p-0" style="overflow: auto">
                                  <table class="table table-striped">
                                      <thead>
-                                         <tr style="text-align: center;">
+                                         <tr>
                                              <th>Profile Pic</th>
                                              <th>Student Name</th>
                                              <th>Email</th>
@@ -84,9 +84,11 @@
                                                  <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}
                                                  </td>
                                                  </td>
-                                                 <td style="text-align: center;min-width:140px">
+                                                 <td style="min-width:230px">
                                                      <a href="{{ url('parent/my_student/subject', $value->id) }}"
-                                                         class="btn btn-primary btn-sm">Subject</a>
+                                                         class="btn btn-success btn-sm">Subject</a>
+                                                     <a href="{{ url('parent/my_student/exam_timetable', $value->id) }}"
+                                                         class="btn btn-primary btn-sm">Exam Timetable</a>
                                                  </td>
                                              </tr>
                                          @endforeach
