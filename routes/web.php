@@ -9,11 +9,12 @@ use App\Http\Controllers\ParentController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ClassSubjectController;
+use App\Http\Controllers\ExaminationsController;
 use App\Http\Controllers\ClassTimetableController;
 use App\Http\Controllers\AssignClassTeacherController;
-use App\Http\Controllers\ExaminationsController;
 
 // login , logout
 Route::get('/', [AuthController::class, 'login']);
@@ -163,6 +164,9 @@ Route::group(['middleware' => 'student'], function () {
 
     // my exam timetable
     Route::get('student/my_exam_timetable', [ExaminationsController::class, 'MyExamTimetable']);
+
+    // my calendar
+    Route::get('student/my_calendar', [CalendarController::class, 'MyCalendar']);
 
     // my account
     Route::get('student/account', [UserController::class, 'MyAccount']);
