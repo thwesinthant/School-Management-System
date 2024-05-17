@@ -32,6 +32,19 @@
  @section('script')
      <script src="{{ url('public/dist/fullcalendar/index.global.js') }}"></script>
      <script type="text/javascript">
+         var events = new Array();
+
+         @foreach ($getMyTimetable as $value)
+             @foreach ($value['week'] as $week)
+                 events.push({
+                     title: '{{ $value['name'] }}',
+                     daysOfWeek: '{{ $week['fullcalendar_day'] }}',
+                     startTime: '{{ $week['start_time'] }}',
+                     endTime: '{{ $week['end_time'] }}',
+                 });
+             @endforeach
+         @endforeach
+
          var calendarID = document.getElementById('calendar');
 
          var calendar = new FullCalendar.Calendar(calendarID, {
@@ -40,6 +53,11 @@
                  center: 'title',
                  right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
              },
+             initialDate: '<?= date('Y-m-d') ?>',
+             navLinks: true, // can click day/week names to navigate views
+             editable: false,
+             events: events,
+             initialView: 'timeGridDay',
          });
 
          calendar.render();
