@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\WeekModel;
 use Illuminate\Http\Request;
 use App\Models\ClassSubjectModel;
@@ -77,5 +78,19 @@ class CalendarController extends Controller
             $result[] = $dataE;
         }
         return $result;
+    }
+
+    // parent side
+
+    public function MyCalendarParent($student_id)
+    {
+        $getStudent = User::getSingle($student_id);
+        $data['getStudent'] = $getStudent;
+
+        $data['getTimetable'] = $this->getTimetable($getStudent->class_id);
+        $data['getExamTimetable'] = $this->getExamTimetable($getStudent->class_id);
+
+        $data['header_title'] = "Student Calendar";
+        return view('parent.my_calendar', $data);
     }
 }
