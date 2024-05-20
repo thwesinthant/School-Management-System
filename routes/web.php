@@ -148,6 +148,9 @@ Route::group(['middleware' => 'teacher'], function () {
     // my exam timetable
     Route::get('teacher/my_exam_timetable', [ExaminationsController::class, 'MyExamTimetableTeacher']);
 
+    // my calendar
+    Route::get('teacher/my_calendar', [CalendarController::class, 'MyCalendarTeacher']);
+
     // change password
     Route::get('teacher/change_password', [UserController::class, 'change_password']);
     Route::post('teacher/change_password', [UserController::class, 'update_change_password']);

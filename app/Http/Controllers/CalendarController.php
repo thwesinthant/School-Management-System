@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\ClassSubjectModel;
 use App\Models\ExamScheduleModel;
 use Illuminate\Support\Facades\Auth;
+use App\Models\AssignClassTeacherModel;
 use App\Models\ClassSubjectTimetableModel;
 
 class CalendarController extends Controller
@@ -81,7 +82,6 @@ class CalendarController extends Controller
     }
 
     // parent side
-
     public function MyCalendarParent($student_id)
     {
         $getStudent = User::getSingle($student_id);
@@ -92,5 +92,14 @@ class CalendarController extends Controller
 
         $data['header_title'] = "Student Calendar";
         return view('parent.my_calendar', $data);
+    }
+
+    // teacher side calendar
+    public function MyCalendarTeacher()
+    {
+        $teacher_id = Auth::user()->id;
+        $data['getClassTimetable'] = AssignClassTeacherModel::getCalendarTeacher($teacher_id);
+        $data['header_title'] = "My Calendar";
+        return view('teacher.my_calendar', $data);
     }
 }
