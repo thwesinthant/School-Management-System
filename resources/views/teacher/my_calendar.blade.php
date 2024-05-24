@@ -51,6 +51,16 @@
          });
      @endforeach
 
+     @foreach ($getExamTimetable as $exam)
+         events.push({
+             title: 'Exam : {{ $exam['class_name'] }} - {{ $exam['exam_name'] }} - {{ $exam['subject_name'] }} ({{ date('h:i A', strtotime($exam['start_time'])) }} to {{ date('h:i A', strtotime($exam['end_time'])) }})',
+             start: '{{ $exam['exam_date'] }}',
+             end: '{{ $exam['exam_date'] }}',
+             color: 'rgba(255, 0, 0, 0.84)',
+             url: '{{ url('teacher/my_exam_timetable') }}',
+         });
+     @endforeach
+
      var calendarID = document.getElementById('calendar');
 
      var calendar = new FullCalendar.Calendar(calendarID, {
