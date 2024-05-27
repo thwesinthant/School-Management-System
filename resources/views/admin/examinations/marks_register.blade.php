@@ -66,34 +66,37 @@
                      <div class="col-md-12">
                          @include('message')
 
-                         <div class="card">
-                             <div class="card-header">
-                                 <h3 class="card-title">Mark Register</h3>
-                             </div>
-                             <!-- /.card-header -->
-                             <div class="card-body p-0">
-                                 <table class="table table-striped">
-                                     <thead>
-                                         <tr style="text-align: center;">
-                                             <th>Subject Name</th>
-                                             <th>Exam Date</th>
-                                             <th>Start Time</th>
-                                             <th>End Time</th>
-                                             <th>Room Number</th>
-                                             <th>Full Marks</th>
-                                             <th>Passing Marks</th>
-                                         </tr>
-                                     </thead>
-                                     <tbody>
-
-                                     </tbody>
-                                 </table>
-                                 <div style="text-align:center; padding:20px;"> <button
-                                         type="submit"class="btn btn-primary">Submit</button>
+                         @if (!empty($getSubject) && !empty($getSubject->count()))
+                             <div class="card">
+                                 <div class="card-header">
+                                     <h3 class="card-title">Mark Register</h3>
                                  </div>
+                                 <!-- /.card-header -->
+                                 <div class="card-body p-0">
+                                     <table class="table table-striped">
+                                         <thead>
+                                             <tr style="text-align: center;">
+                                                 <th>STUDENT NAME</th>
+                                                 @foreach ($getSubject as $subject)
+                                                     <th>{{ $subject->subject_name }}
+                                                         {{ $subject->subject_type }} : {{ $subject->passing_mark }} /
+                                                         {{ $subject->full_marks }}
+                                                     </th>
+                                                 @endforeach
+                                                 <th>ACTION</th>
+                                             </tr>
+                                         </thead>
+                                         <tbody>
+
+                                         </tbody>
+                                     </table>
+                                     <div style="text-align:center; padding:20px;"> <button
+                                             type="submit"class="btn btn-primary">Submit</button>
+                                     </div>
+                                 </div>
+                                 <!-- /.card-body -->
                              </div>
-                             <!-- /.card-body -->
-                         </div>
+                         @endif
 
                          <!-- /.card -->
                      </div>

@@ -139,6 +139,13 @@ class ExaminationsController extends Controller
         $data['getClass'] = ClassModel::getClass();
         $data['getExam'] = ExamModel::getExam();
 
+        if (!empty($request->get('exam_id')) && !empty($request->get('class_id'))) {
+            $data['getSubject'] = ExamScheduleModel::getSubject($request->get('exam_id'), $request->get('class_id'));
+            // get student array in order to show their marks
+            $data['getStudent'] = User::getStudentClass($request->get('class_id'), $request->get('class_id'));
+            dd($data['getStudent']);
+        }
+
         $data['header_title'] = ' Marks Register ';
         return view('admin.examinations.marks_register', $data);
     }
