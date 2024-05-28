@@ -14,7 +14,7 @@
          </section>
 
          {{-- Search Exam Schedule Form --}}
-         <div class="row" style="margin:7.5px ">
+         <div class="row" style="margin:7.5px;overflow: auto ">
              <div class="col-md-12">
                  <div class="card">
                      <div class="card-header">
@@ -67,7 +67,7 @@
                          @include('message')
 
                          @if (!empty($getSubject) && !empty($getSubject->count()))
-                             <div class="card">
+                             <div class="card" style="overflow: auto;">
                                  <div class="card-header">
                                      <h3 class="card-title">Mark Register</h3>
                                  </div>
@@ -75,7 +75,7 @@
                                  <div class="card-body p-0">
                                      <table class="table table-striped">
                                          <thead>
-                                             <tr style="text-align: center;">
+                                             <tr>
                                                  <th>STUDENT NAME</th>
                                                  @foreach ($getSubject as $subject)
                                                      <th>{{ $subject->subject_name }}
@@ -87,7 +87,45 @@
                                              </tr>
                                          </thead>
                                          <tbody>
-
+                                             @if (!empty($getStudent) && !empty($getStudent->count()))
+                                                 @foreach ($getStudent as $student)
+                                                     <tr>
+                                                         <td>{{ $student->name }} {{ $student->last_name }}</td>
+                                                         @foreach ($getSubject as $subject)
+                                                             <td>
+                                                                 <div style="margin-bottom: 10px">
+                                                                     Class work
+                                                                     <input type="text" name=""
+                                                                         placeholder="Enter Marks" style="width: 200px"
+                                                                         class="form-control">
+                                                                 </div>
+                                                                 <div style="margin-bottom: 10px">
+                                                                     Home work
+                                                                     <input type="text" name=""
+                                                                         placeholder="Enter Marks" style="width: 200px"
+                                                                         class="form-control">
+                                                                 </div>
+                                                                 <div style="margin-bottom: 10px">
+                                                                     Test work
+                                                                     <input type="text" name=""
+                                                                         placeholder="Enter Marks" style="width: 200px"
+                                                                         class="form-control">
+                                                                 </div>
+                                                                 <div style="margin-bottom: 10px">
+                                                                     Exam
+                                                                     <input type="text" name=""
+                                                                         placeholder="Enter Marks" style="width: 200px"
+                                                                         class="form-control">
+                                                                 </div>
+                                                             </td>
+                                                         @endforeach
+                                                         <td>
+                                                             <button type="button"
+                                                                 class="btn btn-success mt-3">Save</button>
+                                                         </td>
+                                                     </tr>
+                                                 @endforeach
+                                             @endif
                                          </tbody>
                                      </table>
                                      <div style="text-align:center; padding:20px;"> <button
