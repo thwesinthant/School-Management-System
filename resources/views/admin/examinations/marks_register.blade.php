@@ -89,41 +89,60 @@
                                          <tbody>
                                              @if (!empty($getStudent) && !empty($getStudent->count()))
                                                  @foreach ($getStudent as $student)
-                                                     <tr>
-                                                         <td>{{ $student->name }} {{ $student->last_name }}</td>
-                                                         @foreach ($getSubject as $subject)
+                                                     <form name="post" class="SubmitForm">
+                                                         {{ csrf_field() }}
+                                                         <input type="hidden" name="student_id"
+                                                             value="{{ $student->id }}">
+                                                         <input type="hidden" name="exam_id"
+                                                             value="{{ Request::get('exam_id') }}">
+                                                         <input type="hidden" name="class_id"
+                                                             value="{{ Request::get('class_id') }}">
+                                                         <tr>
+                                                             <td>{{ $student->name }} {{ $student->last_name }}</td>
+                                                             @php
+                                                                 $i = 1;
+                                                             @endphp
+                                                             @foreach ($getSubject as $subject)
+                                                                 <td>
+                                                                     <div style="margin-bottom: 10px">
+                                                                         Class work
+                                                                         <input type="text"
+                                                                             name="mark[{{ $i }}][class_work]"
+                                                                             placeholder="Enter Marks" style="width: 200px"
+                                                                             class="form-control">
+                                                                     </div>
+                                                                     <div style="margin-bottom: 10px">
+                                                                         Home work
+                                                                         <input type="text"
+                                                                             name="mark[{{ $i }}][home_work]"
+                                                                             placeholder="Enter Marks" style="width: 200px"
+                                                                             class="form-control">
+                                                                     </div>
+                                                                     <div style="margin-bottom: 10px">
+                                                                         Test work
+                                                                         <input type="text"
+                                                                             name="mark[{{ $i }}][test_work]"
+                                                                             placeholder="Enter Marks" style="width: 200px"
+                                                                             class="form-control">
+                                                                     </div>
+                                                                     <div style="margin-bottom: 10px">
+                                                                         Exam
+                                                                         <input type="text"
+                                                                             name="mark[{{ $i }}][exam]"
+                                                                             placeholder="Enter Marks" style="width: 200px"
+                                                                             class="form-control">
+                                                                     </div>
+                                                                 </td>
+                                                                 @php
+                                                                     $i++;
+                                                                 @endphp
+                                                             @endforeach
                                                              <td>
-                                                                 <div style="margin-bottom: 10px">
-                                                                     Class work
-                                                                     <input type="text" name=""
-                                                                         placeholder="Enter Marks" style="width: 200px"
-                                                                         class="form-control">
-                                                                 </div>
-                                                                 <div style="margin-bottom: 10px">
-                                                                     Home work
-                                                                     <input type="text" name=""
-                                                                         placeholder="Enter Marks" style="width: 200px"
-                                                                         class="form-control">
-                                                                 </div>
-                                                                 <div style="margin-bottom: 10px">
-                                                                     Test work
-                                                                     <input type="text" name=""
-                                                                         placeholder="Enter Marks" style="width: 200px"
-                                                                         class="form-control">
-                                                                 </div>
-                                                                 <div style="margin-bottom: 10px">
-                                                                     Exam
-                                                                     <input type="text" name=""
-                                                                         placeholder="Enter Marks" style="width: 200px"
-                                                                         class="form-control">
-                                                                 </div>
+                                                                 <button type="submit"
+                                                                     class="btn btn-success mt-3">Save</button>
                                                              </td>
-                                                         @endforeach
-                                                         <td>
-                                                             <button type="button"
-                                                                 class="btn btn-success mt-3">Save</button>
-                                                         </td>
-                                                     </tr>
+                                                         </tr>
+                                                     </form>
                                                  @endforeach
                                              @endif
                                          </tbody>
@@ -147,4 +166,22 @@
      <!-- /.content -->
      </div>
      <!-- /.content-wrapper -->
+ @endsection
+
+ @section('script')
+     .
+     <script type="text/javascript">
+         $('.SubmitForm').submit(function(e) {
+             e.preventDefault();
+             $.ajax({
+                 type: "POST",
+                 url: "{{ url('admin/examinations/submit_marks_register') }}",
+                 data: $(this).serialize(),
+                 dataType: "json",
+                 success: function(data) {
+
+                 }
+             });
+         })
+     </script>
  @endsection
