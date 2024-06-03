@@ -182,7 +182,7 @@
                  data: $(this).serialize(),
                  dataType: "json",
                  success: function(data) {
-
+                     alert(data.message);
                  }
              });
          })
