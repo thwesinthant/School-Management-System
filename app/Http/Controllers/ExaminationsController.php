@@ -183,6 +183,11 @@ class ExaminationsController extends Controller
         }
     }
 
+    public function single_submit_marks_register(Request $request)
+    {
+        dd($request->all());
+    }
+
     public function MyExamTimetable(Request $request)
     {
         $class_id = Auth::user()->class_id;

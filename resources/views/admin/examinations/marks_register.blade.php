@@ -147,6 +147,14 @@
                                                                              class="form-control"
                                                                              value="{{ !empty($getMark->exam) ? $getMark->exam : '' }}">
                                                                      </div>
+                                                                     <div style="margin-bottom: 10px;">
+                                                                         <button type="button"
+                                                                             class="btn btn-primary SaveSingleSubject"
+                                                                             id="{{ $student->id }}"
+                                                                             data-val="{{ $subject->subject_id }}"
+                                                                             data-exam="{{ Request::get('exam_id') }}"
+                                                                             data-class="{{ Request::get('class_id') }}">Save</button>
+                                                                     </div>
                                                                  </td>
                                                                  @php
                                                                      $i++;
@@ -192,6 +200,29 @@
                  type: "POST",
                  url: "{{ url('admin/examinations/submit_marks_register') }}",
                  data: $(this).serialize(),
+                 dataType: "json",
+                 success: function(data) {
+                     alert(data.message);
+                 }
+             });
+         })
+
+         $('.SaveSingleSubject').click(function(e) {
+             var student_id = $(this).attr('id');
+             var subject_id = $(this).attr('data-val');
+             var exam_id = $(this).attr('data-exam');
+             var class_id = $(this).attr('data-class');
+
+             $.ajax({
+                 type: "POST",
+                 url: "{{ url('admin/examinations/single_submit_marks_register') }}",
+                 data: {
+                     '_token': "{{ csrf_token() }}",
+                     student_id: student_id,
+                     subject_id: subject_id,
+                     exam_id: exam_id,
+                     class_id: class_id,
+                 },
                  dataType: "json",
                  success: function(data) {
                      alert(data.message);
