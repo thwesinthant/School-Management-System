@@ -119,6 +119,7 @@
                                                                              value="{{ $subject->subject_id }}">
                                                                          <input type="text"
                                                                              name="mark[{{ $i }}][class_work]"
+                                                                             id="class_work_{{ $student->id }}{{ $subject->subject_id }}"
                                                                              placeholder="Enter Marks" style="width: 200px"
                                                                              class="form-control"
                                                                              value="{{ !empty($getMark->class_work) ? $getMark->class_work : '' }}">
@@ -127,24 +128,30 @@
                                                                          Home work
                                                                          <input type="text"
                                                                              name="mark[{{ $i }}][home_work]"
-                                                                             placeholder="Enter Marks" style="width: 200px"
-                                                                             class="form-control"
+                                                                             id="home_work_{{ $student->id }}{{ $subject->subject_id }}"
+                                                                             placeholder="Enter
+                                                                             Marks"
+                                                                             style="width: 200px" class="form-control"
                                                                              value="{{ !empty($getMark->home_work) ? $getMark->home_work : '' }}">
                                                                      </div>
                                                                      <div style="margin-bottom: 10px">
                                                                          Test work
                                                                          <input type="text"
                                                                              name="mark[{{ $i }}][test_work]"
-                                                                             placeholder="Enter Marks" style="width: 200px"
-                                                                             class="form-control"
+                                                                             id="test_work_{{ $student->id }}{{ $subject->subject_id }}"
+                                                                             placeholder="Enter
+                                                                             Marks"
+                                                                             style="width: 200px" class="form-control"
                                                                              value="{{ !empty($getMark->test_work) ? $getMark->test_work : '' }}">
                                                                      </div>
                                                                      <div style="margin-bottom: 10px">
                                                                          Exam
                                                                          <input type="text"
                                                                              name="mark[{{ $i }}][exam]"
-                                                                             placeholder="Enter Marks" style="width: 200px"
-                                                                             class="form-control"
+                                                                             id="exam_{{ $student->id }}{{ $subject->subject_id }}"
+                                                                             placeholder="Enter
+                                                                             Marks"
+                                                                             style="width: 200px" class="form-control"
                                                                              value="{{ !empty($getMark->exam) ? $getMark->exam : '' }}">
                                                                      </div>
                                                                      <div style="margin-bottom: 10px;">
@@ -212,6 +219,11 @@
              var subject_id = $(this).attr('data-val');
              var exam_id = $(this).attr('data-exam');
              var class_id = $(this).attr('data-class');
+             var class_work = $('#class_work_' + student_id + subject_id).val();
+             var home_work = $('#home_work_' + student_id + subject_id).val();
+             var test_work = $('#test_work_' + student_id + subject_id).val();
+             var exam = $('#exam_' + student_id + subject_id).val();
+
 
              $.ajax({
                  type: "POST",
@@ -222,6 +234,10 @@
                      subject_id: subject_id,
                      exam_id: exam_id,
                      class_id: class_id,
+                     class_work: class_work,
+                     home_work: home_work,
+                     test_work: test_work,
+                     exam: exam
                  },
                  dataType: "json",
                  success: function(data) {
