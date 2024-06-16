@@ -158,6 +158,7 @@
                                                                          <button type="button"
                                                                              class="btn btn-primary SaveSingleSubject"
                                                                              id="{{ $student->id }}"
+                                                                             data-schedule="{{ $subject->id }}"
                                                                              data-val="{{ $subject->subject_id }}"
                                                                              data-exam="{{ Request::get('exam_id') }}"
                                                                              data-class="{{ Request::get('class_id') }}">Save</button>
@@ -219,17 +220,19 @@
              var subject_id = $(this).attr('data-val');
              var exam_id = $(this).attr('data-exam');
              var class_id = $(this).attr('data-class');
+             var id = $(this).attr('data-schedule');
+
              var class_work = $('#class_work_' + student_id + subject_id).val();
              var home_work = $('#home_work_' + student_id + subject_id).val();
              var test_work = $('#test_work_' + student_id + subject_id).val();
              var exam = $('#exam_' + student_id + subject_id).val();
-
 
              $.ajax({
                  type: "POST",
                  url: "{{ url('admin/examinations/single_submit_marks_register') }}",
                  data: {
                      '_token': "{{ csrf_token() }}",
+                     id: id,
                      student_id: student_id,
                      subject_id: subject_id,
                      exam_id: exam_id,
