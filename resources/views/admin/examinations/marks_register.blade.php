@@ -115,6 +115,9 @@
                                                                      <div style="margin-bottom: 10px">
                                                                          Class work
                                                                          <input type="hidden"
+                                                                             name="mark[{{ $i }}][id]"
+                                                                             value="{{ $subject->id }}">
+                                                                         <input type="hidden"
                                                                              name="mark[{{ $i }}][subject_id]"
                                                                              value="{{ $subject->subject_id }}">
                                                                          <input type="text"

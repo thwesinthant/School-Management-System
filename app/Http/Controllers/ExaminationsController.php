@@ -152,35 +152,51 @@ class ExaminationsController extends Controller
 
     public function submit_marks_register(Request $request)
     {
+        $valiation = 0;
         if (!empty($request->mark)) {
             foreach ($request->mark as $mark) {
+                $getExamSchedule = ExamScheduleModel::getSingle($mark['id']);
+
+                $full_marks = $getExamSchedule->full_marks;
+
                 $class_work = !empty($mark['class_work']) ? $mark['class_work'] : 0;
                 $home_work = !empty($mark['home_work']) ? $mark['home_work'] : 0;
                 $test_work = !empty($mark['test_work']) ? $mark['test_work'] : 0;
                 $exam = !empty($mark['exam']) ? $mark['exam'] : 0;
 
-                $getMark = MarksRegisterModel::CheckAlreadyExist($request->student_id, $request->exam_id, $request->class_id, $mark['subject_id']);
+                $total_marks = $class_work + $home_work + $test_work + $exam;
 
-                if (!empty($getMark)) {
-                    $save = $getMark;
+                if ($full_marks >= $total_marks) {
+                    $getMark = MarksRegisterModel::CheckAlreadyExist($request->student_id, $request->exam_id, $request->class_id, $mark['subject_id']);
+
+                    if (!empty($getMark)) {
+                        $save = $getMark;
+                    } else {
+                        $save = new MarksRegisterModel;
+                        $save->created_by  = Auth::user()->id;
+                    }
+
+                    $save->student_id = $request->student_id;
+                    $save->exam_id = $request->exam_id;
+                    $save->class_id  = $request->class_id;
+                    $save->subject_id  = $mark['subject_id'];
+                    $save->class_work  = $class_work;
+                    $save->home_work  = $home_work;
+                    $save->test_work  = $test_work;
+                    $save->exam  = $exam;
+                    $save->save();
                 } else {
-                    $save = new MarksRegisterModel;
-                    $save->created_by  = Auth::user()->id;
+                    $valiation = 1;
                 }
-
-                $save->student_id = $request->student_id;
-                $save->exam_id = $request->exam_id;
-                $save->class_id  = $request->class_id;
-                $save->subject_id  = $mark['subject_id'];
-                $save->class_work  = $class_work;
-                $save->home_work  = $home_work;
-                $save->test_work  = $test_work;
-                $save->exam  = $exam;
-                $save->save();
             }
-            $json['message'] = 'Mark Register Sucessfully Saved';
-            echo json_encode($json);
         }
+
+        if ($valiation == 0) {
+            $json['message'] = 'Mark Register Sucessfully Saved';
+        } else {
+            $json['message'] = 'Mark Register Sucessfully Saved. Some Subject mark greater than full mark.';
+        }
+        echo json_encode($json);
     }
 
     public function single_submit_marks_register(Request $request)
@@ -196,6 +212,7 @@ class ExaminationsController extends Controller
         $exam = !empty($request['exam']) ? $request['exam'] : 0;
 
         $total_marks = $class_work + $home_work + $test_work + $exam;
+
         if ($full_marks >= $total_marks) {
             $getMark = MarksRegisterModel::CheckAlreadyExist($request->student_id, $request->exam_id, $request->class_id, $request->subject_id);
 
@@ -215,7 +232,6 @@ class ExaminationsController extends Controller
             $save->test_work  = $test_work;
             $save->exam  = $exam;
             $save->save();
-
             $json['message'] = 'Mark Register Sucessfully Saved';
         } else {
             $json['message'] = 'Your total mark is greater than the full mark';
