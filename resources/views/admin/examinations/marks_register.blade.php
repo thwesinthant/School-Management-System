@@ -72,7 +72,7 @@
                                      <h3 class="card-title">Mark Register</h3>
                                  </div>
                                  <!-- /.card-header -->
-                                 <div class="card-body p-0">
+                                 <div class="card-body p-0" style="overflow: auto">
                                      <table class="table table-striped">
                                          <thead>
                                              <tr>
@@ -101,16 +101,38 @@
                                                              <td>{{ $student->name }} {{ $student->last_name }}</td>
                                                              @php
                                                                  $i = 1;
+                                                                 $totalStudentMark = 0;
+                                                                 $totalFullMarks = 0;
+                                                                 $totalPassingMark = 0;
+                                                                 $pass_fail_vali = 0;
                                                              @endphp
                                                              @foreach ($getSubject as $subject)
                                                                  @php
+                                                                     $totalMark = 0;
+                                                                     $totalFullMarks =
+                                                                         $totalFullMarks + $subject->full_marks;
+
+                                                                     $totalPassingMark =
+                                                                         $totalPassingMark + $subject->passing_mark;
+
                                                                      $getMark = $subject->getMark(
                                                                          $student->id,
                                                                          Request::get('exam_id'),
                                                                          Request::get('class_id'),
                                                                          $subject->subject_id,
                                                                      );
+
+                                                                     if (!empty($getMark)) {
+                                                                         $totalMark =
+                                                                             $getMark->class_work +
+                                                                             $getMark->home_work +
+                                                                             $getMark->test_work +
+                                                                             $getMark->exam;
+                                                                     }
+
+                                                                     $totalStudentMark = $totalStudentMark + $totalMark;
                                                                  @endphp
+
                                                                  <td>
                                                                      <div style="margin-bottom: 10px">
                                                                          Class work
@@ -123,8 +145,7 @@
                                                                          <input type="text"
                                                                              name="mark[{{ $i }}][class_work]"
                                                                              id="class_work_{{ $student->id }}{{ $subject->subject_id }}"
-                                                                             placeholder="Enter Marks" style="width: 200px"
-                                                                             class="form-control"
+                                                                             style="width: 200px" class="form-control"
                                                                              value="{{ !empty($getMark->class_work) ? $getMark->class_work : '' }}">
                                                                      </div>
                                                                      <div style="margin-bottom: 10px">
@@ -132,8 +153,6 @@
                                                                          <input type="text"
                                                                              name="mark[{{ $i }}][home_work]"
                                                                              id="home_work_{{ $student->id }}{{ $subject->subject_id }}"
-                                                                             placeholder="Enter
-                                                                             Marks"
                                                                              style="width: 200px" class="form-control"
                                                                              value="{{ !empty($getMark->home_work) ? $getMark->home_work : '' }}">
                                                                      </div>
@@ -142,8 +161,6 @@
                                                                          <input type="text"
                                                                              name="mark[{{ $i }}][test_work]"
                                                                              id="test_work_{{ $student->id }}{{ $subject->subject_id }}"
-                                                                             placeholder="Enter
-                                                                             Marks"
                                                                              style="width: 200px" class="form-control"
                                                                              value="{{ !empty($getMark->test_work) ? $getMark->test_work : '' }}">
                                                                      </div>
@@ -152,8 +169,6 @@
                                                                          <input type="text"
                                                                              name="mark[{{ $i }}][exam]"
                                                                              id="exam_{{ $student->id }}{{ $subject->subject_id }}"
-                                                                             placeholder="Enter
-                                                                             Marks"
                                                                              style="width: 200px" class="form-control"
                                                                              value="{{ !empty($getMark->exam) ? $getMark->exam : '' }}">
                                                                      </div>
@@ -166,14 +181,54 @@
                                                                              data-exam="{{ Request::get('exam_id') }}"
                                                                              data-class="{{ Request::get('class_id') }}">Save</button>
                                                                      </div>
+                                                                     @if (!empty($getMark))
+                                                                         <div style="margin-bottom: 10px;">
+                                                                             <b>Total Mark : </b> {{ $totalMark }}<br>
+                                                                             <b>Passing Mark : </b>
+                                                                             {{ $subject->passing_mark }} <br>
+
+                                                                             @if ($totalMark >= $subject->passing_mark)
+                                                                                 <span
+                                                                                     style="color: green;font-weight:bold;">Pass</span>
+                                                                             @else
+                                                                                 <span
+                                                                                     style="color: red;font-weight:bold;">Fail</span>
+                                                                                 @php
+                                                                                     $pass_fail_vali = 1;
+                                                                                 @endphp
+                                                                             @endif
+                                                                         </div>
+                                                                     @endif
+
                                                                  </td>
+
                                                                  @php
                                                                      $i++;
                                                                  @endphp
                                                              @endforeach
-                                                             <td>
+
+                                                             <td style="min-width: 250px;">
                                                                  <button type="submit"
                                                                      class="btn btn-success mt-3">Save</button>
+                                                                 @if (!empty($totalStudentMark))
+                                                                     <br>
+                                                                     <br>
+                                                                     <b> Total Student Mark : </b> {{ $totalStudentMark }}
+                                                                     <br>
+                                                                     <b> Total Subject Mark : </b>{{ $totalFullMarks }}
+                                                                     <br>
+                                                                     <b> Total Passing Mark : </b>{{ $totalPassingMark }}
+                                                                     <br>
+
+                                                                     @if ($pass_fail_vali == 0)
+                                                                         <span
+                                                                             style="color: green;font-weight:bold;">Pass</span>
+                                                                     @else
+                                                                         <span
+                                                                             style="color: red;font-weight:bold;">Fail</span>
+                                                                     @endif
+                                                                 @endif
+
                                                              </td>
                                                          </tr>
                                                      </form>
@@ -181,9 +236,6 @@
                                              @endif
                                          </tbody>
                                      </table>
-                                     <div style="text-align:center; padding:20px;"> <button
-                                             type="submit"class="btn btn-primary">Submit</button>
-                                     </div>
                                  </div>
                                  <!-- /.card-body -->
                              </div>
