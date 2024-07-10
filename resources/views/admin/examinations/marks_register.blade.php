@@ -188,10 +188,10 @@
                                                                              {{ $subject->passing_mark }} <br>
 
                                                                              @if ($totalMark >= $subject->passing_mark)
-                                                                                 <span
+                                                                                 Result : <span
                                                                                      style="color: green;font-weight:bold;">Pass</span>
                                                                              @else
-                                                                                 <span
+                                                                                 Result : <span
                                                                                      style="color: red;font-weight:bold;">Fail</span>
                                                                                  @php
                                                                                      $pass_fail_vali = 1;
@@ -219,12 +219,19 @@
                                                                      <br>
                                                                      <b> Total Passing Mark : </b>{{ $totalPassingMark }}
                                                                      <br>
+                                                                     @php
+                                                                         $percentage =
+                                                                             ($totalStudentMark * 100) /
+                                                                             $totalFullMarks;
+                                                                     @endphp
 
+                                                                     <b>Percentage : </b>{{ round($percentage, 20) }}%
+                                                                     <br>
                                                                      @if ($pass_fail_vali == 0)
-                                                                         <span
+                                                                         Result : <span
                                                                              style="color: green;font-weight:bold;">Pass</span>
                                                                      @else
-                                                                         <span
+                                                                         Result : <span
                                                                              style="color: red;font-weight:bold;">Fail</span>
                                                                      @endif
                                                                  @endif
