@@ -311,6 +311,13 @@
                           </a>
                       </li>
                       <li class="nav-item">
+                          <a href="{{ url('teacher/marks_register') }}"
+                              class="nav-link  @if (Request::segment(2) == 'marks_register') active @endif">
+                              <i class="nav-icon fas fa-tachometer-alt"></i>
+                              <p>Marks Register</p>
+                          </a>
+                      </li>
+                      <li class="nav-item">
                           <a href="{{ url('teacher/change_password') }}"
                               class="nav-link  @if (Request::segment(2) == 'change_password') active @endif">
                               <i class="nav-icon far fa-user "></i>
