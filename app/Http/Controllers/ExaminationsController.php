@@ -289,6 +289,13 @@ class ExaminationsController extends Controller
         return view('student.my_exam_timetable', $data);
     }
 
+    // exam result - student side
+    public function myExamResult()
+    {
+        $data['header_title'] = 'My Exam Result';
+        return view('student.my_exam_result', $data);
+    }
+
     // teacher side work
     public function MyExamTimetableTeacher(Request $request)
     {

@@ -178,6 +178,9 @@ Route::group(['middleware' => 'student'], function () {
     // my exam timetable
     Route::get('student/my_exam_timetable', [ExaminationsController::class, 'MyExamTimetable']);
 
+    // my exam result
+    Route::get('student/my_exam_result', [ExaminationsController::class, 'myExamResult']);
+
     // my calendar
     Route::get('student/my_calendar', [CalendarController::class, 'MyCalendar']);
 
