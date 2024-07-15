@@ -292,6 +292,16 @@ class ExaminationsController extends Controller
     // exam result - student side
     public function myExamResult()
     {
+        $result = array();
+        $getExam = MarksRegisterModel::getExam(Auth::user()->id);
+
+        // get specific subject name at given exam_id & student_id
+        foreach ($getExam as $value) {
+            $dataE = array();
+            $dataE['exam_name'] = $value->exam_name;
+            $getExamSubject = MarksRegisterModel::getExamSubject($value->exam_id, Auth::user()->id);
+        }
+
         $data['header_title'] = 'My Exam Result';
         return view('student.my_exam_result', $data);
     }
