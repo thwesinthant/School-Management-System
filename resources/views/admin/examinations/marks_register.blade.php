@@ -137,6 +137,12 @@
                                                                      <div style="margin-bottom: 10px">
                                                                          Class work
                                                                          <input type="hidden"
+                                                                             name="mark[{{ $i }}][full_marks]"
+                                                                             value="{{ $subject->full_marks }}">
+                                                                         <input type="hidden"
+                                                                             name="mark[{{ $i }}][passing_mark]"
+                                                                             value="{{ $subject->passing_mark }}">
+                                                                         <input type="hidden"
                                                                              name="mark[{{ $i }}][id]"
                                                                              value="{{ $subject->id }}">
                                                                          <input type="hidden"

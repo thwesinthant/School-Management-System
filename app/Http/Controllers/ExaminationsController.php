@@ -179,6 +179,8 @@ class ExaminationsController extends Controller
                 $home_work = !empty($mark['home_work']) ? $mark['home_work'] : 0;
                 $test_work = !empty($mark['test_work']) ? $mark['test_work'] : 0;
                 $exam = !empty($mark['exam']) ? $mark['exam'] : 0;
+                $full_marks = !empty($mark['full_marks']) ? $mark['full_marks'] : 0;
+                $passing_mark = !empty($mark['passing_mark']) ? $mark['passing_mark'] : 0;
 
                 $total_marks = $class_work + $home_work + $test_work + $exam;
 
@@ -200,6 +202,8 @@ class ExaminationsController extends Controller
                     $save->home_work  = $home_work;
                     $save->test_work  = $test_work;
                     $save->exam  = $exam;
+                    $save->full_marks  = $full_marks;
+                    $save->passing_mark  = $passing_mark;
                     $save->save();
                 } else {
                     $valiation = 1;
@@ -246,7 +250,11 @@ class ExaminationsController extends Controller
             $save->class_work  = $class_work;
             $save->home_work  = $home_work;
             $save->test_work  = $test_work;
+
             $save->exam  = $exam;
+            $save->full_marks  = $getExamSchedule->full_marks;
+            $save->passing_mark  = $getExamSchedule->passing_mark;
+
             $save->save();
             $json['message'] = 'Mark Register Sucessfully Saved';
         } else {
