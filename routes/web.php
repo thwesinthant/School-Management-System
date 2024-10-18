@@ -126,6 +126,14 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('admin/examinations/submit_marks_register', [ExaminationsController::class, 'submit_marks_register']);
     Route::post('admin/examinations/single_submit_marks_register', [ExaminationsController::class, 'single_submit_marks_register']);
 
+    // marks grade
+    Route::get('admin/examinations/marks_grade', [ExaminationsController::class, 'marks_grade']);
+    Route::get('admin/examinations/marks_grade/add', [ExaminationsController::class, 'marks_grade_add']);
+    // Route::post('admin/examinations/marks_grade_add', [ExaminationsController::class, 'marks_grade_insert']);
+    // Route::get('admin/examinations/marks_grade_edit/{id}', [ExaminationsController::class, 'marks_grade_edit']);
+    // Route::post('admin/examinations/marks_grade_edit/{id}', [ExaminationsController::class, 'marks_grade_update']);
+    // Route::get('admin/examinations/marks_grade_delete/{id}', [ExaminationsController::class, 'marks_grade_delete']);
+
 
     // my account
     Route::get('admin/account', [UserController::class, 'MyAccount']);

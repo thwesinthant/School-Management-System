@@ -264,6 +264,18 @@ class ExaminationsController extends Controller
         echo json_encode($json);
     }
 
+    public function marks_grade()
+    {
+        $data['header_title'] = 'Marks Grade';
+        return view('admin.examinations.marks_grade.list', $data);
+    }
+
+    public function marks_grade_add()
+    {
+        $data['header_title'] = 'Add New Marks Grade';
+        return view('admin.examinations.marks_grade.add', $data);
+    }
+
     public function MyExamTimetable(Request $request)
     {
         $class_id = Auth::user()->class_id;
