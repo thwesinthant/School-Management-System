@@ -11,6 +11,7 @@ use App\Models\ExamScheduleModel;
 use Illuminate\Support\Facades\Auth;
 use App\Models\AssignClassTeacherModel;
 use App\Models\MarksRegisterModel;
+use App\Models\MarksGradeModel;
 
 class ExaminationsController extends Controller
 {
@@ -266,6 +267,7 @@ class ExaminationsController extends Controller
 
     public function marks_grade()
     {
+        $data['getRecord'] = MarksGradeModel::getRecord();
         $data['header_title'] = 'Marks Grade';
         return view('admin.examinations.marks_grade.list', $data);
     }
@@ -274,6 +276,34 @@ class ExaminationsController extends Controller
     {
         $data['header_title'] = 'Add New Marks Grade';
         return view('admin.examinations.marks_grade.add', $data);
+    }
+
+    public function marks_grade_insert(Request $request)
+    {
+        $mark = new MarksGradeModel;
+        $mark->name = trim($request->name);
+        $mark->percent_from = trim($request->percent_from);
+        $mark->percent_to = trim($request->percent_to);
+        $mark->created_by  = Auth::user()->id;
+        $mark->save();
+
+        return redirect('admin/examinations/marks_grade')->with('success', 'Mark Grade Successfully Created');
+    }
+
+    public function marks_grade_edit($id)
+    {
+        $data['getRecord'] = MarksGradeModel::getSingle($id);
+        $data['header_title'] = 'Edit Marks Grade';
+        return view('admin.examinations.marks_grade.edit', $data);
+    }
+
+    public function marks_grade_delete($id)
+    {
+
+        $mark = MarksGradeModel::getSingle($id);
+        $mark->delete();
+
+        return redirect('admin/examinations/marks_grade')->with('success', 'Marks Grade Successfully Deleted');
     }
 
     public function MyExamTimetable(Request $request)

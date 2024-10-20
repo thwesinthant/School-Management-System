@@ -34,7 +34,6 @@
                                  <table class="table table-striped">
                                      <thead>
                                          <tr style="text-align: center;">
-                                             <th>#</th>
                                              <th>Grade Name</th>
                                              <th>Precent From</th>
                                              <th>Precent To</th>
@@ -44,7 +43,22 @@
                                          </tr>
                                      </thead>
                                      <tbody>
-
+                                         @foreach ($getRecord as $value)
+                                             <tr style="text-align: center;">
+                                                 <td>{{ $value->name }}</td>
+                                                 <td>{{ $value->percent_from }}</td>
+                                                 <td>{{ $value->percent_to }}</td>
+                                                 <td>{{ $value->created_name }}</td>
+                                                 <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}
+                                                 </td>
+                                                 <td style="text-align: center; ">
+                                                     <a href="{{ url('admin/examinations/marks_grade/edit', $value->id) }}"
+                                                         class="btn btn-primary">Edit</a>
+                                                     <a href="{{ url('admin/examinations/marks_grade/delete', $value->id) }}"
+                                                         class="btn btn-danger">Delete</a>
+                                                 </td>
+                                             </tr>
+                                         @endforeach
                                      </tbody>
                                  </table>
                                  <div style="float: right;padding:10px;">
