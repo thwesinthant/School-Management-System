@@ -15,6 +15,8 @@ use App\Http\Controllers\ClassSubjectController;
 use App\Http\Controllers\ExaminationsController;
 use App\Http\Controllers\ClassTimetableController;
 use App\Http\Controllers\AssignClassTeacherController;
+use App\Http\Controllers\AttendanceController;
+
 
 // login , logout
 Route::get('/', [AuthController::class, 'login']);
@@ -134,6 +136,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('admin/examinations/marks_grade/edit/{id}', [ExaminationsController::class, 'marks_grade_update']);
     Route::get('admin/examinations/marks_grade/delete/{id}', [ExaminationsController::class, 'marks_grade_delete']);
 
+    // Attendance
+    Route::get('admin/attendance/student', [AttendanceController::class, 'AttendanceStudent']);
 
     // my account
     Route::get('admin/account', [UserController::class, 'MyAccount']);
