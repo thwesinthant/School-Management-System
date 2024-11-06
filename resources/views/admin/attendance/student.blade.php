@@ -45,12 +45,57 @@
                                  </div>
                              </div>
                          </div>
-
-
                      </form>
                  </div>
+
+                 @if (!empty(Request::get('class_id')) && !empty(Request::get('attendance_date')))
+                     <div class="card" style="overflow: auto;">
+                         <div class="card-header">
+                             <h3 class="card-title">Student List</h3>
+                         </div>
+                         <div class="card-body p-0" style="overflow: auto">
+                             <table class="table table-striped">
+                                 <thead>
+                                     <tr>
+                                         <th>Student ID</th>
+                                         <th>Student Name</th>
+                                         <th>Attendance</th>
+                                     </tr>
+                                 </thead>
+                                 <tbody>
+                                     @if (!empty($getStudent) && !empty($getStudent->count()))
+                                         @foreach ($getStudent as $value)
+                                             <tr>
+                                                 <td>{{ $value->id }}</td>
+                                                 <td>{{ $value->name }} {{ $value->last_name }}</td>
+                                                 <td>
+                                                     <label style="margin-right: 10px">
+                                                         <input style="margin-right: 3px" type="radio"
+                                                             name="attendance{{ $value->id }}">Present</label>
+                                                     <label style="margin-right: 10px"><input style="margin-right: 3px"
+                                                             type="radio"
+                                                             name="attendance{{ $value->id }}">Late</label>
+                                                     <label style="margin-right: 10px"><input style="margin-right: 3px"
+                                                             type="radio"
+                                                             name="attendance{{ $value->id }}">Absent</label>
+                                                     <label style="margin-right: 10px"><input style="margin-right: 3px"
+                                                             type="radio" name="attendance{{ $value->id }}">Half
+                                                         Day</label>
+
+                                                 </td>
+                                             </tr>
+                                         @endforeach
+                                     @endif
+                                 </tbody>
+                             </table>
+                         </div>
+                     </div>
+                 @endif
+
              </div>
          </div>
+
+
      </div>
      <!-- /.content-wrapper -->
  @endsection
