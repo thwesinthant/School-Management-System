@@ -7,7 +7,7 @@
              <div class="container-fluid">
                  <div class="row mb-2">
                      <div class="col-sm-6">
-                         <h1>Student Attendance</h1>
+                         <h1>Student Attendance </h1>
                      </div>
                  </div>
              </div><!-- /.container-fluid -->
@@ -39,9 +39,10 @@
                                      <input type="date" class="form-control" id="getAttendanceDate"
                                          name="attendance_date" value="{{ Request::get('attendance_date') }}" required>
                                  </div>
+
                                  <div class="form-group col-md-3" style="margin-top:30px;">
                                      <button type="submit" class="btn btn-primary">Search</button>
-                                     <a href="{{ url('admin/attendance/student') }}" class="btn btn-success">Reset</a>
+                                     <a href="{{ url('admin/attendance/report') }}" class="btn btn-success">Reset</a>
                                  </div>
                              </div>
                          </div>
@@ -116,35 +117,4 @@
 
      </div>
      <!-- /.content-wrapper -->
- @endsection
-
-
-
- @section('script')
-     .
-     <script type="text/javascript">
-         $('.SaveAttendance').change(function(e) {
-             var student_id = $(this).attr('id');
-             var attendance_type = $(this).val();
-             var class_id = $('#getClass').val();
-             var attendance_date = $('#getAttendanceDate').val();
-
-             $.ajax({
-                 type: "POST",
-                 url: "{{ url('admin/attendance/student/save') }}",
-                 data: {
-                     '_token': "{{ csrf_token() }}",
-                     student_id: student_id,
-                     attendance_type: attendance_type,
-                     class_id: class_id,
-                     attendance_date: attendance_date,
-
-                 },
-                 dataType: "json",
-                 success: function(data) {
-                     alert(data.message);
-                 }
-             });
-         })
-     </script>
  @endsection

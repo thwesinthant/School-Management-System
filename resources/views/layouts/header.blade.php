@@ -276,6 +276,13 @@
                                       <p>Student Attendance</p>
                                   </a>
                               </li>
+                              <li class="nav-item">
+                                  <a href="{{ url('admin/attendance/report') }}"
+                                      class="nav-link @if (Request::segment(3) == 'report') active @endif">
+                                      <i class="far fa-circle nav-icon"></i>
+                                      <p>Attendance Report</p>
+                                  </a>
+                              </li>
                           </ul>
                       </li>
                       <li class="nav-item">
