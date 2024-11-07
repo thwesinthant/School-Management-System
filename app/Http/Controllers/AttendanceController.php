@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\ClassModel;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\StudentAttendanceModel;
+use App\Models\AssignClassTeacherModel;
 
 class AttendanceController extends Controller
 {
@@ -51,5 +52,19 @@ class AttendanceController extends Controller
         $data['getRecord'] = StudentAttendanceModel::getRecord();
         $data['header_title'] = 'Attendance Report';
         return view('admin.attendance.report', $data);
+    }
+
+    // Teacher's side
+    public function AttendanceStudentTeacher(Request $request)
+    {
+        // get log in teacher's assigned class and exam data
+        $data['getClass']  = AssignClassTeacherModel::getMyClassSubjectGroup(Auth::user()->id);
+
+        if (!empty($request->get('class_id')) && !empty($request->get('attendance_date'))) {
+            $data['getStudent'] = User::getStudentClass($request->get('class_id'));
+        }
+
+        $data['header_title'] = 'Student Attendance';
+        return view('teacher.attendance.student', $data);
     }
 }

@@ -176,6 +176,10 @@ Route::group(['middleware' => 'teacher'], function () {
     Route::post('teacher/submit_marks_register', [ExaminationsController::class, 'submit_marks_register']);
     Route::post('teacher/single_submit_marks_register', [ExaminationsController::class, 'single_submit_marks_register']);
 
+    // Attendance
+    Route::get('teacher/attendance/student', [AttendanceController::class, 'AttendanceStudentTeacher']);
+    Route::post('teacher/attendance/student/save', [AttendanceController::class, 'AttendanceStudentSubmit']);
+
     // change password
     Route::get('teacher/change_password', [UserController::class, 'change_password']);
     Route::post('teacher/change_password', [UserController::class, 'update_change_password']);
