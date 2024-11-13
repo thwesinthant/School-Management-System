@@ -427,6 +427,13 @@
                           </a>
                       </li>
                       <li class="nav-item">
+                          <a href="{{ url('student/my_attendance') }}"
+                              class="nav-link  @if (Request::segment(2) == 'my_attendance') active @endif">
+                              <i class="nav-icon fas fa-tachometer-alt"></i>
+                              <p>My Attendance </p>
+                          </a>
+                      </li>
+                      <li class="nav-item">
                           <a href="{{ url('student/account') }}"
                               class="nav-link  @if (Request::segment(2) == 'account') active @endif">
                               <i class="nav-icon fas fa-tachometer-alt"></i>

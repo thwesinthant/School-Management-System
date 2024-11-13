@@ -1,9 +1,6 @@
  @extends('layouts.app')
  @section('content')
-     <!-- Content Wrapper. Contains page content -->
      <div class="content-wrapper">
-         <!-- Content Header (Page header) -->
-         {{-- from message.blade.php --}}
          <section class="content-header">
              <div class="container-fluid">
                  <div class="row mb-2">
@@ -11,15 +8,8 @@
                          <h1>My Subject</h1>
                      </div>
                  </div>
-             </div><!-- /.container-fluid -->
-         </section>
-
-         {{-- Search Subject Form --}}
-         <div class="row" style="margin:7.5px ">
-             <div class="col-md-12">
-
              </div>
-         </div>
+         </section>
 
          <!-- Main content -->
          <section class="content">

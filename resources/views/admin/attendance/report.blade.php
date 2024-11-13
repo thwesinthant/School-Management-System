@@ -49,10 +49,17 @@
                                          @endforeach
                                      </select>
                                  </div>
+
                                  <div class="form-group col-md-2" style="margin-bottom:0px;">
-                                     <label>Attendance Date</label>
-                                     <input type="date" class="form-control" id="getAttendanceDate"
-                                         name="attendance_date" value="{{ Request::get('attendance_date') }}">
+                                     <label>Start Attendance Date</label>
+                                     <input type="date" class="form-control" name="start_attendance_date"
+                                         value="{{ Request::get('start_attendance_date') }}">
+                                 </div>
+
+                                 <div class="form-group col-md-2" style="margin-bottom:0px;">
+                                     <label>End Attendance Date</label>
+                                     <input type="date" class="form-control" name="end_attendance_date"
+                                         value="{{ Request::get('end_attendance_date') }}">
                                  </div>
 
                                  <div class="form-group col-md-2" style="margin-bottom:0px;">

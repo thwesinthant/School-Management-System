@@ -205,6 +205,9 @@ Route::group(['middleware' => 'student'], function () {
     // my calendar
     Route::get('student/my_calendar', [CalendarController::class, 'MyCalendar']);
 
+    // my attendance
+    Route::get('student/my_attendance', [AttendanceController::class, 'MyAttendanceStudent']);
+
     // my account
     Route::get('student/account', [UserController::class, 'MyAccount']);
     Route::post('student/account', [UserController::class, 'UpdateMyAccountStudent']);
@@ -229,9 +232,11 @@ Route::group(['middleware' => 'parent'], function () {
 
     Route::get('parent/my_student/calendar/{student_id}', [CalendarController::class, 'MyCalendarParent']);
 
-
     // my student subject timetable
     Route::get('parent/my_student/subject/class_timetable/{class_id}/{subject_id}/{student_id}', [ClassTimetableController::class, 'MyTimetableParent'])->name('parent_class_timetable');
+
+    // my student attendance
+    Route::get('parent/my_student/attendance/{student_id}', [AttendanceController::class, 'MyAttendanceParent']);
 
     // change password
     Route::get('parent/change_password', [UserController::class, 'change_password']);

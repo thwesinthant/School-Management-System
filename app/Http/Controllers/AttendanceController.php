@@ -54,7 +54,7 @@ class AttendanceController extends Controller
         return view('admin.attendance.report', $data);
     }
 
-    // Teacher's side
+    // teacher side
     public function AttendanceStudentTeacher(Request $request)
     {
         // get log in teacher's assigned class and exam data
@@ -68,7 +68,6 @@ class AttendanceController extends Controller
         return view('teacher.attendance.student', $data);
     }
 
-    // teacher side
     public function AttendanceReportTeacher()
     {
         $getClass  = AssignClassTeacherModel::getMyClassSubjectGroup(Auth::user()->id);
@@ -82,5 +81,25 @@ class AttendanceController extends Controller
         $data['getRecord'] = StudentAttendanceModel::getRecordTeacher($classArray);
         $data['header_title'] = 'Attendance Report';
         return view('teacher.attendance.report', $data);
+    }
+
+    // student side
+
+    public function MyAttendanceStudent()
+    {
+        $data['getClass'] = StudentAttendanceModel::getClassStudent(Auth::user()->id);
+        $data['getRecord'] = StudentAttendanceModel::getRecordStudent(Auth::user()->id);
+        $data['header_title'] = "My Attendance";
+        return view('student.my_attendance', $data);
+    }
+
+    // parent side
+    public function MyAttendanceParent($student_id)
+    {
+        $data['getStudent'] = User::getSingle($student_id);
+        $data['getClass'] = StudentAttendanceModel::getClassStudent($student_id);
+        $data['getRecord'] = StudentAttendanceModel::getRecordStudent($student_id);
+        $data['header_title'] = "Student Attendance";
+        return view('parent.my_attendance', $data);
     }
 }
