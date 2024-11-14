@@ -11,11 +11,12 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\CommunicateController;
 use App\Http\Controllers\ClassSubjectController;
 use App\Http\Controllers\ExaminationsController;
 use App\Http\Controllers\ClassTimetableController;
 use App\Http\Controllers\AssignClassTeacherController;
-use App\Http\Controllers\AttendanceController;
 
 
 // login , logout
@@ -141,6 +142,12 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('admin/attendance/student/save', [AttendanceController::class, 'AttendanceStudentSubmit']);
     // Attendance Report
     Route::get('admin/attendance/report', [AttendanceController::class, 'AttendanceReport']);
+
+    // COMMUNICATE
+    // notice board
+    Route::get('admin/communicate/notice_board', [CommunicateController::class, 'NoticeBoard']);
+    Route::get('admin/communicate/notice_board/add', [CommunicateController::class, 'AddNoticeBoard']);
+    Route::post('admin/communicate/notice_board/add', [CommunicateController::class, 'InsertNoticeBoard']);
 
     // my account
     Route::get('admin/account', [UserController::class, 'MyAccount']);
