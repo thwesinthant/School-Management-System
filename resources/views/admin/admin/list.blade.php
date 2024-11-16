@@ -96,6 +96,7 @@
                                          @endforeach
                                      </tbody>
                                  </table>
+
                                  <div style="float: right;padding:10px;">
                                      {!! $getRecord->appends(Illuminate\Support\Facades\Request::except('page'))->links() !!}</div>
 

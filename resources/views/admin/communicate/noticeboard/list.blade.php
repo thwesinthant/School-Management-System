@@ -15,6 +15,70 @@
              </div>
          </section>
 
+         <div class="row" style="margin:7.5px ">
+             <div class="col-md-12">
+                 <div class="card">
+                     <div class="card-header">
+                         <h3 class="card-title">Search Notice
+                             Board</h3>
+                     </div>
+                     <form action="" method="get">
+                         <div class="card-body">
+                             <div class="row">
+                                 <div class="form-group col-md-2">
+                                     <label>Title</label>
+                                     <input type="text" name="title" value="{{ Request::get('title') }}"
+                                         class="form-control" placeholder="Enter title">
+                                 </div>
+
+                                 <div class="form-group col-md-2">
+                                     <label>Notice Date From</label>
+                                     <input type="date" name="notice_date_from"
+                                         value="{{ Request::get('notice_date_from') }}" class="form-control">
+                                 </div>
+
+                                 <div class="form-group col-md-2">
+                                     <label>Notice Date To</label>
+                                     <input type="date" name="notice_date_to"
+                                         value="{{ Request::get('notice_date_to') }}" class="form-control">
+                                 </div>
+
+                                 <div class="form-group col-md-2">
+                                     <label>Publish Date From</label>
+                                     <input type="date" name="publish_date_from"
+                                         value="{{ Request::get('publish_date_from') }}" class="form-control">
+                                 </div>
+
+                                 <div class="form-group col-md-2">
+                                     <label>Publish Date To</label>
+                                     <input type="date" name="publish_date_to"
+                                         value="{{ Request::get('publish_date_to') }}" class="form-control">
+                                 </div>
+
+                                 <div class="form-group col-md-2">
+                                     <label>Message To</label>
+                                     <select name="message_to" class="form-control">
+                                         <option value="">Select</option>
+                                         <option {{ Request::get('message_to') == 3 ? 'selected' : '' }} value="3">
+                                             Student</option>
+                                         <option {{ Request::get('message_to') == 4 ? 'selected' : '' }} value="4">
+                                             Parent</option>
+                                         <option {{ Request::get('message_to') == 2 ? 'selected' : '' }} value="2">
+                                             Teacher</option>
+                                     </select>
+                                 </div>
+
+                                 <div class="form-group col-md-3" style="margin-top:30px;">
+                                     <button type="submit" class="btn btn-primary">Search</button>
+                                     <a href="{{ url('admin/communicate/notice_board') }}" class="btn btn-success">Reset</a>
+                                 </div>
+                             </div>
+                         </div>
+                     </form>
+                 </div>
+             </div>
+         </div>
+
          <section class="content">
              <div class="container-fluid">
                  <div class="row">
@@ -58,6 +122,12 @@
                                                  </td>
                                                  <td>{{ $value->created_by_name }}</td>
                                                  <td>{{ date('d-m-Y', strtotime($value->created_at)) }}</td>
+                                                 <td style="text-align: center; ">
+                                                     <a href="{{ url('admin/communicate/notice_board/edit', $value->id) }}"
+                                                         class="btn btn-primary">Edit</a>
+                                                     <a href="{{ url('admin/communicate/notice_board/delete', $value->id) }}"
+                                                         class="btn btn-danger">Delete</a>
+                                                 </td>
                                              </tr>
                                          @empty
                                              <tr>
@@ -66,6 +136,9 @@
                                          @endforelse
                                      </tbody>
                                  </table>
+
+                                 <div style="float: right;padding:10px;">
+                                     {!! $getRecord->appends(Illuminate\Support\Facades\Request::except('page'))->links() !!}</div>
                              </div>
                          </div>
                      </div>
