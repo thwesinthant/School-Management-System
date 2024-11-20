@@ -17,7 +17,7 @@ use App\Http\Controllers\ClassSubjectController;
 use App\Http\Controllers\ExaminationsController;
 use App\Http\Controllers\ClassTimetableController;
 use App\Http\Controllers\AssignClassTeacherController;
-
+use App\Models\NoticeBoardModel;
 
 // login , logout
 Route::get('/', [AuthController::class, 'login']);
@@ -217,6 +217,9 @@ Route::group(['middleware' => 'student'], function () {
 
     // my attendance
     Route::get('student/my_attendance', [AttendanceController::class, 'MyAttendanceStudent']);
+
+    // my notice board
+    Route::get('student/my_notice_board', [CommunicateController::class, 'MyNoticeBoardStudent']);
 
     // my account
     Route::get('student/account', [UserController::class, 'MyAccount']);

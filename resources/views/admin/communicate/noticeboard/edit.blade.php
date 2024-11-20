@@ -42,6 +42,7 @@
                                          $message_to_parent = $getRecord->getMessageToSingle($getRecord->id, 4);
                                          $message_to_teacher = $getRecord->getMessageToSingle($getRecord->id, 2);
                                      @endphp
+
                                      <div class="form-group">
                                          <label style="display: block">Message To</label>
                                          <label style="margin-right: 50px"><input style="margin-right: 5px"
