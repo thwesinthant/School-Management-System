@@ -192,6 +192,9 @@ Route::group(['middleware' => 'teacher'], function () {
     // Attendance Report
     Route::get('teacher/attendance/report', [AttendanceController::class, 'AttendanceReportTeacher']);
 
+    // notice board
+    Route::get('teacher/my_notice_board', [CommunicateController::class, 'MyNoticeBoardTeacher']);
+
     // change password
     Route::get('teacher/change_password', [UserController::class, 'change_password']);
     Route::post('teacher/change_password', [UserController::class, 'update_change_password']);
