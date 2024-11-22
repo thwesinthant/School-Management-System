@@ -100,4 +100,19 @@ class CommunicateController extends Controller
         $data['header_title'] = "My Notice Board";
         return view('teacher.my_notice_board', $data);
     }
+
+    // parent side work
+    public function MyNoticeBoardParent()
+    {
+        $data['getRecord'] = NoticeBoardModel::getRecordUser(Auth::user()->user_type);
+        $data['header_title'] = "My Notice Board";
+        return view('parent.my_notice_board', $data);
+    }
+
+    public function  MyStudentNoticeBoardParent()
+    {
+        $data['getRecord'] = NoticeBoardModel::getRecordUser(3);
+        $data['header_title'] = "My Student Notice Board";
+        return view('parent.my_student_notice_board', $data);
+    }
 }

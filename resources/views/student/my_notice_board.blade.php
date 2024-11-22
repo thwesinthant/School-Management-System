@@ -56,10 +56,6 @@
                      @foreach ($getRecord as $value)
                          <div class="col-md-12">
                              <div class="card card-primary card-outline">
-                                 <div class="card-header">
-                                     <h3 class="card-title">Read Mail</h3>
-                                 </div>
-                                 <!-- /.card-header -->
                                  <div class="card-body p-0">
                                      <div class="mailbox-read-info">
                                          <h5>{{ $value->title }}</h5>

@@ -254,6 +254,10 @@ Route::group(['middleware' => 'parent'], function () {
     // my student attendance
     Route::get('parent/my_student/attendance/{student_id}', [AttendanceController::class, 'MyAttendanceParent']);
 
+    // notice board
+    Route::get('parent/my_student_notice_board', [CommunicateController::class, 'MyStudentNoticeBoardParent']);
+    Route::get('parent/my_notice_board', [CommunicateController::class, 'MyNoticeBoardParent']);
+
     // change password
     Route::get('parent/change_password', [UserController::class, 'change_password']);
     Route::post('parent/change_password', [UserController::class, 'update_change_password']);

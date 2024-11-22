@@ -44,8 +44,7 @@
 
                                          <div class="form-group col-md-3" style="margin-top:30px;">
                                              <button type="submit" class="btn btn-primary">Search</button>
-                                             <a href="{{ url('teacher/my_notice_board') }}"
-                                                 class="btn btn-success">Reset</a>
+                                             <a href="{{ url('parent/my_notice_board') }}" class="btn btn-success">Reset</a>
                                          </div>
                                      </div>
                                  </div>
@@ -66,9 +65,7 @@
 
                                      <div class="mailbox-read-message">
                                          {!! $value->message !!}
-
                                      </div>
-
                                  </div>
                              </div>
                          </div>

@@ -1,12 +1,11 @@
  @extends('layouts.app')
  @section('content')
      <div class="content-wrapper">
-
          <section class="content-header">
              <div class="container-fluid">
                  <div class="row mb-2">
                      <div class="col-sm-6">
-                         <h1>My Notice Board</h1>
+                         <h1>My Student Notice Board</h1>
                      </div>
                  </div>
              </div>
@@ -18,7 +17,7 @@
                      <div class="col-md-12">
                          <div class="card">
                              <div class="card-header">
-                                 <h3 class="card-title">Search Notice
+                                 <h3 class="card-title">Search Student Notice
                                      Board</h3>
                              </div>
                              <form action="" method="get">
@@ -44,7 +43,7 @@
 
                                          <div class="form-group col-md-3" style="margin-top:30px;">
                                              <button type="submit" class="btn btn-primary">Search</button>
-                                             <a href="{{ url('teacher/my_notice_board') }}"
+                                             <a href="{{ url('parent/my_student_notice_board') }}"
                                                  class="btn btn-success">Reset</a>
                                          </div>
                                      </div>
