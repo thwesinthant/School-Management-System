@@ -60,6 +60,11 @@ class User extends Authenticatable
     {
         return User::find($id);
     }
+    static public function SearchUser($search)
+    {
+        // $return = self::select('users.*');
+        // $return = $return->where('users.user_type', '=', 3)
+    }
 
     static public function getAdmin()
     {

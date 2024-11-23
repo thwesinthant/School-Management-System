@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\NoticeBoardModel;
 use Illuminate\Support\Facades\Auth;
@@ -9,6 +10,22 @@ use App\Models\NoticeBoardMessageModel;
 
 class CommunicateController extends Controller
 {
+
+
+    public function SendEmail()
+    {
+        $data['header_title'] = "Send Email";
+        return view('admin.communicate.send_email', $data);
+    }
+
+    public function SearchUser(Request $request)
+    {
+        $json = array();
+        if (!empty($request->search)) {
+            $getUser = User::SearchUser($request->search);
+        }
+    }
+
     public function NoticeBoard()
     {
         $data['getRecord'] = NoticeBoardModel::getRecord();

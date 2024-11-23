@@ -112,7 +112,6 @@ Route::group(['middleware' => 'admin'], function () {
 
     // Examination
     // exam
-
     Route::get('admin/examinations/exam/list', [ExaminationsController::class, 'exam_list']);
     Route::get('admin/examinations/exam/add', [ExaminationsController::class, 'exam_add']);
     Route::post('admin/examinations/exam/add', [ExaminationsController::class, 'exam_insert']);
@@ -151,6 +150,10 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/communicate/notice_board/edit/{id}', [CommunicateController::class, 'EditNoticeBoard']);
     Route::post('admin/communicate/notice_board/edit/{id}', [CommunicateController::class, 'UpdateNoticeBoard']);
     Route::get('admin/communicate/notice_board/delete/{id}', [CommunicateController::class, 'DeleteNoticeBoard']);
+    // send email
+    Route::get('admin/communicate/send_email', [CommunicateController::class, 'SendEmail']);
+    Route::get('admin/communicate/search_user', [CommunicateController::class, 'SearchUser']);
+
 
     // my account
     Route::get('admin/account', [UserController::class, 'MyAccount']);
