@@ -23,6 +23,7 @@
              <div class="container-fluid">
                  <div class="row">
                      <div class="col-md-12">
+                         @include('message')
                          <div class="card card-primary">
                              <form action="" method="post">
                                  {{ csrf_field() }}
@@ -35,7 +36,7 @@
 
                                      <div class="form-group">
                                          <label>User (Student / Parent / Teacher) </label>
-                                         <select class="form-control select2" style="width: 100%;">
+                                         <select class="form-control select2" style="width: 100%;" name="user_id">
                                              <option selected="">Select</option>
                                          </select>
                                      </div>

@@ -152,6 +152,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/communicate/notice_board/delete/{id}', [CommunicateController::class, 'DeleteNoticeBoard']);
     // send email
     Route::get('admin/communicate/send_email', [CommunicateController::class, 'SendEmail']);
+    Route::post('admin/communicate/send_email', [CommunicateController::class, 'SendEmailUser']);
+    // search user in select box
     Route::get('admin/communicate/search_user', [CommunicateController::class, 'SearchUser']);
 
 

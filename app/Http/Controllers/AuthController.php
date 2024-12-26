@@ -70,7 +70,7 @@ class AuthController extends Controller
 
             Mail::to($user->email)->send(new ForgotPasswordMail($user));
 
-            return redirect()->back()->with('success', 'Please check your email and restart your password');
+            return redirect()->back()->with('success', 'Please check your email and reset your password');
         } else {
             return redirect()->back()->with('error', 'Email not found in the system!');
         }
